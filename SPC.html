@@ -1,0 +1,2400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>यम धर्म टर्मिनल ⚖️ YAMA DHARMA TERMINAL</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Noto+Sans+Devanagari:wght@400;600;700&family=Noto+Sans+Kannada:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   YAMA DHARMA TERMINAL — DESIGN TOKENS
+   Palette: Void #0a0605 · Blood #8c1220 · Ember #c94a2d
+            Gold #d4af37 · Bone #f1e6d3 · Ash #6b5a52
+   Display: Cinzel Decorative (titles) / Cinzel (headers)
+   Body: EB Garamond · Devanagari/Kannada: Noto Sans
+   Signature: the balance scale motif recurs as a rule/divider
+   ============================================================ */
+:root{
+  --void:#0a0605;
+  --void-2:#150a08;
+  --blood:#8c1220;
+  --blood-deep:#4a0710;
+  --ember:#c94a2d;
+  --gold:#d4af37;
+  --gold-dim:#8a6f24;
+  --bone:#f1e6d3;
+  --ash:#8a746a;
+  --line: rgba(212,175,55,0.25);
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  background: radial-gradient(ellipse at 50% -10%, #200a08 0%, var(--void) 55%, #050302 100%);
+  color:var(--bone);
+  font-family:'EB Garamond', 'Noto Sans Devanagari','Noto Sans Kannada', serif;
+  min-height:100vh;
+  overflow-x:hidden;
+  position:relative;
+}
+body::before{
+  content:"";
+  position:fixed; inset:0;
+  background-image:
+    radial-gradient(1px 1px at 20% 30%, rgba(212,175,55,0.35) 0, transparent 40%),
+    radial-gradient(1px 1px at 70% 60%, rgba(212,175,55,0.25) 0, transparent 40%),
+    radial-gradient(1px 1px at 40% 80%, rgba(212,175,55,0.2) 0, transparent 40%),
+    radial-gradient(1px 1px at 90% 20%, rgba(212,175,55,0.3) 0, transparent 40%);
+  pointer-events:none; z-index:0; opacity:0.6;
+}
+h1,h2,h3,.font-display{ font-family:'Cinzel Decorative','Cinzel',serif; letter-spacing:0.03em; }
+h4,h5,.font-head{ font-family:'Cinzel',serif; letter-spacing:0.06em; text-transform:uppercase; }
+[lang="hi"]{ font-family:'Noto Sans Devanagari', serif; }
+[lang="kn"]{ font-family:'Noto Sans Kannada', serif; }
+
+.hidden{display:none !important;}
+video.bg-video{ position:fixed; top:0; left:0; width:100%; height:100%; object-fit:cover; z-index:-1; filter:brightness(0.55) saturate(1.1); }
+
+/* --- Layout shells --- */
+.screen{ position:relative; z-index:1; min-height:100vh; display:flex; flex-direction:column; align-items:center; padding:32px 18px 60px; }
+.center-screen{ justify-content:center; text-align:center; }
+.container{ width:100%; max-width:760px; }
+
+/* --- Signature divider: the scale rule --- */
+.scale-rule{ display:flex; align-items:center; gap:14px; width:100%; max-width:420px; margin:22px auto; opacity:0.85; }
+.scale-rule::before,.scale-rule::after{ content:""; flex:1; height:1px; background:linear-gradient(90deg, transparent, var(--gold), transparent); }
+.scale-rule svg{ width:26px; height:26px; flex-shrink:0; }
+
+/* --- Top nav --- */
+.top-nav{ position:sticky; top:0; z-index:20; width:100%; display:flex; flex-wrap:wrap; gap:6px; justify-content:center;
+  padding:10px 8px; background:rgba(10,6,5,0.88); backdrop-filter:blur(6px); border-bottom:1px solid var(--line); }
+.nav-btn{ background:transparent; border:1px solid transparent; color:var(--ash); font-family:'Cinzel',serif;
+  font-size:11px; letter-spacing:0.08em; text-transform:uppercase; padding:8px 12px; border-radius:3px; cursor:pointer; transition:all .25s; }
+.nav-btn:hover{ color:var(--gold); border-color:var(--line); }
+.nav-btn.active{ color:var(--void); background:var(--gold); border-color:var(--gold); }
+
+/* --- Buttons: stylish, layered, glowing on hover --- */
+.btn{
+  position:relative; display:inline-flex; align-items:center; justify-content:center; gap:8px;
+  cursor:pointer; padding:14px 26px; margin:8px 4px; min-width:260px;
+  background:linear-gradient(180deg, #2a0d0d 0%, #170707 100%);
+  color:var(--bone); border:1px solid var(--gold-dim); border-radius:4px;
+  font-family:'Cinzel',serif; font-size:13px; letter-spacing:0.09em; text-transform:uppercase;
+  transition: transform .2s ease, box-shadow .3s ease, border-color .3s ease, background .3s ease;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.03);
+}
+.btn::after{ content:""; position:absolute; inset:0; border-radius:4px; opacity:0; transition:opacity .3s;
+  box-shadow:0 0 22px 2px rgba(201,74,45,0.55); pointer-events:none; }
+.btn:hover{ transform:translateY(-2px); border-color:var(--gold); background:linear-gradient(180deg,#3a1010 0%,#210909 100%); }
+.btn:hover::after{ opacity:1; }
+.btn:active{ transform:translateY(0); }
+.btn-primary{ background:linear-gradient(180deg, var(--blood) 0%, var(--blood-deep) 100%); border-color:var(--ember); font-weight:600; }
+.btn-primary:hover{ background:linear-gradient(180deg, #a8172a 0%, var(--blood-deep) 100%); }
+.btn-gold{ background:linear-gradient(180deg, var(--gold) 0%, var(--gold-dim) 100%); color:#1c1200; border-color:var(--gold); font-weight:700; }
+.btn-gold:hover{ background:linear-gradient(180deg,#e6c34d 0%, var(--gold-dim) 100%); }
+.btn-ghost{ background:transparent; border:1px solid var(--line); color:var(--ash); min-width:auto; padding:8px 16px; font-size:11px; box-shadow:none;}
+.btn-ghost:hover{ color:var(--gold); }
+.btn-sm{ min-width:auto; padding:8px 14px; font-size:11px; margin:4px; }
+.btn:disabled{ opacity:0.35; cursor:not-allowed; transform:none; }
+.btn:disabled:hover::after{ opacity:0; }
+
+/* --- Inputs --- */
+label.field-label{ display:block; text-align:left; font-family:'Cinzel',serif; font-size:10px; letter-spacing:0.1em;
+  text-transform:uppercase; color:var(--gold-dim); margin:14px 2px 4px; }
+input[type=text],input[type=number],select,textarea{
+  background:rgba(0,0,0,0.4); color:var(--bone); border:1px solid var(--line); border-radius:3px;
+  padding:12px 14px; margin:0; width:100%; font-family:'EB Garamond',serif; font-size:16px;
+  transition:border-color .2s, box-shadow .2s;
+}
+input:focus,select:focus,textarea:focus{ outline:none; border-color:var(--gold); box-shadow:0 0 0 3px rgba(212,175,55,0.15); }
+textarea{ min-height:110px; resize:vertical; }
+::placeholder{ color:var(--ash); opacity:0.7; }
+
+/* --- Cards / panels --- */
+.panel{ background:rgba(20,10,8,0.55); border:1px solid var(--line); border-radius:6px; padding:22px; margin:14px 0;
+  box-shadow:0 8px 30px rgba(0,0,0,0.35); text-align:left; }
+.eyebrow{ font-family:'Cinzel',serif; font-size:11px; letter-spacing:0.18em; text-transform:uppercase; color:var(--ember); margin-bottom:6px; }
+
+/* --- Sin list --- */
+#sin-list{ max-height:280px; width:100%; overflow-y:auto; border:1px solid var(--line); border-radius:5px;
+  padding:8px; background:rgba(0,0,0,0.35); text-align:left; }
+#sin-list::-webkit-scrollbar{ width:8px; }
+#sin-list::-webkit-scrollbar-thumb{ background:var(--gold-dim); border-radius:4px; }
+.sin-item{ width:100%; text-align:left; background:transparent; border:1px solid transparent; color:var(--bone);
+  padding:10px 12px; margin:3px 0; border-radius:4px; cursor:pointer; font-family:'EB Garamond',serif; font-size:15px;
+  display:flex; justify-content:space-between; align-items:center; transition:all .2s; }
+.sin-item:hover{ background:rgba(140,18,32,0.25); border-color:var(--line); }
+.sin-item.highlight{ border-color:var(--gold); background:rgba(212,175,55,0.12); box-shadow:0 0 12px rgba(212,175,55,0.15); }
+.sin-item .tag{ font-size:10px; color:var(--ash); font-family:'Cinzel',serif; letter-spacing:.08em; }
+
+#timer{ color:var(--bone); font-size:18px; margin-bottom:14px; text-shadow:0 0 10px #000; font-family:'Cinzel',serif; letter-spacing:0.08em; }
+
+/* --- Scale animation --- */
+.scale-stage{ width:100%; max-width:420px; height:260px; margin:10px auto 6px; position:relative; }
+.scale-stage svg{ width:100%; height:100%; }
+.beam{ transform-origin:210px 70px; transition: transform 2.4s cubic-bezier(.4,0,.2,1); }
+.pan-left,.pan-right{ transition: transform 2.4s cubic-bezier(.4,0,.2,1); }
+.glow-text{ text-shadow:0 0 14px rgba(212,175,55,0.6); }
+
+/* --- Result / certificate --- */
+.result-title{ font-size: clamp(24px,6vw,38px); text-shadow:0 0 24px rgba(201,74,45,0.7); margin:6px 0; }
+.result-desc{ font-size:19px; color:var(--bone); margin:6px 0 4px; }
+#certificate-wrap{ margin-top:18px; }
+canvas#cert-canvas,.cert-canvas-el{ max-width:100%; border:1px solid var(--gold-dim); border-radius:4px; box-shadow:0 10px 40px rgba(0,0,0,0.5); }
+
+/* --- Info pages --- */
+.info-page{ text-align:left; }
+.info-page p{ line-height:1.7; color:#e7d9c4; }
+.yuga-grid{ display:grid; grid-template-columns:1fr; gap:14px; margin-top:10px; }
+@media(min-width:640px){ .yuga-grid{ grid-template-columns:1fr 1fr; } }
+.yuga-card{ border-left:3px solid var(--gold); padding:12px 16px; background:rgba(0,0,0,0.3); border-radius:0 6px 6px 0; }
+.yuga-card h3{ margin:0 0 6px; font-size:18px; color:var(--gold); }
+
+/* --- Admin table --- */
+.admin-table{ width:100%; border-collapse:collapse; font-size:14px; }
+.admin-table th,.admin-table td{ border-bottom:1px solid var(--line); padding:8px 6px; text-align:left; vertical-align:top; }
+.admin-table th{ font-family:'Cinzel',serif; font-size:11px; letter-spacing:0.06em; text-transform:uppercase; color:var(--gold-dim); }
+.badge{ display:inline-block; background:rgba(212,175,55,0.14); color:var(--gold); border:1px solid var(--line);
+  border-radius:20px; padding:2px 10px; font-size:11px; font-family:'Cinzel',serif; }
+
+/* --- Dashboard stats --- */
+.stat-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:12px; margin:14px 0; }
+@media(min-width:640px){ .stat-grid{ grid-template-columns:repeat(4,1fr); } }
+.stat-card{ background:rgba(0,0,0,0.35); border:1px solid var(--line); border-radius:6px; padding:16px; text-align:center; }
+.stat-num{ font-family:'Cinzel Decorative',serif; font-size:28px; color:var(--gold); text-shadow:0 0 10px rgba(212,175,55,0.4); }
+.stat-lbl{ font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:var(--ash); margin-top:4px; font-family:'Cinzel',serif; }
+
+/* --- Toast --- */
+#toast{ position:fixed; bottom:20px; left:50%; transform:translateX(-50%) translateY(20px); background:var(--gold);
+  color:#1c1200; padding:10px 20px; border-radius:4px; font-family:'Cinzel',serif; font-size:12px; letter-spacing:0.05em;
+  opacity:0; transition:all .35s; z-index:100; pointer-events:none; box-shadow:0 8px 24px rgba(0,0,0,0.5); }
+#toast.show{ opacity:1; transform:translateX(-50%) translateY(0); }
+
+.small-note{ font-size:12px; color:var(--ash); margin-top:10px; line-height:1.5; }
+.error-text{ color:var(--ember); font-size:13px; margin-top:6px; min-height:16px; }
+.footer-note{ margin-top:40px; font-size:11px; color:var(--ash); letter-spacing:0.05em; text-align:center; }
+
+@media(prefers-reduced-motion: reduce){
+  .beam,.pan-left,.pan-right,.btn,.btn::after{ transition:none !important; }
+}
+
+/* ============================================================
+   FEAR LAYER — fog, vignette pulse, flicker, shake, blood drip
+   ============================================================ */
+#fog-layer{ position:fixed; inset:0; z-index:2; pointer-events:none; opacity:0.55; mix-blend-mode:screen; }
+.fog-a,.fog-b{ position:absolute; inset:-20%; background:radial-gradient(ellipse at 30% 40%, rgba(140,18,32,0.10), transparent 60%),
+  radial-gradient(ellipse at 70% 70%, rgba(80,10,10,0.10), transparent 55%); }
+.fog-a{ animation: drift1 38s linear infinite; }
+.fog-b{ animation: drift2 52s linear infinite reverse; opacity:0.6; }
+@keyframes drift1{ 0%{transform:translate(0,0) scale(1);} 50%{transform:translate(4%,3%) scale(1.06);} 100%{transform:translate(0,0) scale(1);} }
+@keyframes drift2{ 0%{transform:translate(0,0) scale(1.05);} 50%{transform:translate(-5%,-2%) scale(1);} 100%{transform:translate(0,0) scale(1.05);} }
+
+#vignette{ position:fixed; inset:0; z-index:3; pointer-events:none;
+  box-shadow: inset 0 0 160px 40px rgba(0,0,0,0.85), inset 0 0 60px 10px rgba(140,18,32,0.15);
+  animation: heartbeat 4.2s ease-in-out infinite; }
+@keyframes heartbeat{ 0%,100%{ box-shadow: inset 0 0 160px 40px rgba(0,0,0,0.85), inset 0 0 60px 10px rgba(140,18,32,0.12);} 48%{ box-shadow: inset 0 0 190px 55px rgba(0,0,0,0.9), inset 0 0 90px 20px rgba(140,18,32,0.28);} }
+
+.flicker-text{ animation: flicker 6s linear infinite; }
+@keyframes flicker{
+  0%,19%,21%,23%,80%,100%{ opacity:1; }
+  20%,22%,79%{ opacity:0.35; }
+  50%{ opacity:0.92; }
+  51%{ opacity:0.55; }
+}
+
+@keyframes shake{
+  0%,100%{ transform:translate(0,0); }
+  10%{ transform:translate(-2px,1px); }
+  20%{ transform:translate(2px,-1px); }
+  30%{ transform:translate(-3px,0); }
+  40%{ transform:translate(3px,1px); }
+  50%{ transform:translate(-1px,-2px); }
+  60%{ transform:translate(1px,2px); }
+  70%{ transform:translate(-2px,-1px); }
+  80%{ transform:translate(2px,1px); }
+  90%{ transform:translate(-1px,0); }
+}
+body.shake{ animation: shake 0.5s linear 2; }
+
+.blood-drip{ position:relative; overflow:visible; }
+.blood-drip::after{ content:""; position:absolute; left:12%; right:12%; top:100%; height:34px;
+  background: repeating-linear-gradient(90deg, transparent 0 22px, rgba(140,18,32,0.9) 22px 24px, transparent 24px 46px);
+  clip-path: polygon(0 0,100% 0,96% 30%,90% 100%,86% 40%,80% 0,74% 55%,68% 15%,62% 100%,56% 25%,50% 0,44% 60%,38% 10%,32% 100%,26% 35%,20% 0,14% 45%,8% 100%,2% 0);
+  opacity:0.55; pointer-events:none; }
+
+/* --- Special buttons --- */
+.btn-danger{ background:linear-gradient(180deg,#7a0d17 0%, #2c0509 100%); border-color:#c94a2d; color:#ffe9e0;
+  animation: dangerpulse 1.8s ease-in-out infinite; font-weight:700; }
+@keyframes dangerpulse{ 0%,100%{ box-shadow:0 2px 12px rgba(0,0,0,.6), 0 0 0 0 rgba(201,74,45,0.5);} 50%{ box-shadow:0 2px 16px rgba(0,0,0,.6), 0 0 22px 6px rgba(201,74,45,0.55);} }
+.btn-danger:hover{ background:linear-gradient(180deg,#9c1220 0%, #2c0509 100%); }
+
+.btn-spectral{ background:rgba(20,10,10,0.25); border:1px dashed var(--gold-dim); color:var(--bone); backdrop-filter:blur(2px);
+  animation: spectral 3.6s ease-in-out infinite; }
+@keyframes spectral{ 0%,100%{ opacity:0.78; letter-spacing:0.09em; } 50%{ opacity:1; letter-spacing:0.14em; } }
+
+.btn-skull{ background:linear-gradient(180deg,#160303 0%, #050101 100%); border-color:#c94a2d; }
+.btn-skull .skull-ico{ display:inline-block; animation: skullshake 2.4s ease-in-out infinite; }
+@keyframes skullshake{ 0%,88%,100%{ transform:rotate(0deg); } 90%{ transform:rotate(-8deg);} 92%{ transform:rotate(7deg);} 94%{ transform:rotate(-5deg);} 96%{ transform:rotate(4deg);} 98%{ transform:rotate(0deg);} }
+
+.btn-glitch{ position:relative; overflow:hidden; }
+.btn-glitch:hover{ animation: glitchbtn 0.35s steps(2,end) 2; }
+@keyframes glitchbtn{ 0%{ clip-path:inset(0 0 0 0); transform:translate(0);} 20%{ clip-path:inset(10% 0 60% 0); transform:translate(-2px,0);} 40%{ clip-path:inset(60% 0 5% 0); transform:translate(2px,0);} 60%{ clip-path:inset(30% 0 40% 0); transform:translate(-1px,0);} 100%{ clip-path:inset(0 0 0 0); transform:translate(0);} }
+
+.ripple{ position:absolute; border-radius:50%; background:rgba(212,175,55,0.45); transform:scale(0); animation:rippleAnim .6s linear; pointer-events:none; }
+@keyframes rippleAnim{ to{ transform:scale(3); opacity:0; } }
+
+.fab-dread{ position:fixed; bottom:18px; right:18px; z-index:50; width:56px; height:56px; border-radius:50%;
+  background:radial-gradient(circle at 35% 30%, #3a0d0d, #0a0605); border:1px solid var(--gold-dim); color:var(--gold);
+  font-size:22px; cursor:pointer; box-shadow:0 6px 20px rgba(0,0,0,0.6); display:flex; align-items:center; justify-content:center;
+  transition:all .3s; }
+.fab-dread:hover{ box-shadow:0 6px 26px rgba(201,74,45,0.6); border-color:var(--ember); transform:scale(1.08); }
+.fab-dread.active{ animation: dangerpulse 1.4s ease-in-out infinite; }
+
+.eye-decor{ position:fixed; z-index:2; pointer-events:none; opacity:0; animation: eyeglow 14s ease-in-out infinite; }
+@keyframes eyeglow{ 0%,92%,100%{ opacity:0; } 94%,97%{ opacity:0.5; } }
+
+.info-page.scary p{ text-shadow: 0 0 1px rgba(0,0,0,0.4); }
+.warn-band{ border:1px dashed var(--ember); background:repeating-linear-gradient(135deg, rgba(140,18,32,0.12) 0 10px, transparent 10px 20px);
+  padding:10px 14px; border-radius:4px; font-family:'Cinzel',serif; font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:var(--ember); text-align:center; margin:14px 0; }
+
+/* ============================================================
+   ULTRA HORROR LAYER — 3D chamber, static, cracks, blood rain,
+   embers, chromatic pulse, whisper flashes
+   ============================================================ */
+
+/* --- 3D perspective stage on the Judgment Hall --- */
+.scene3d{ perspective:1000px; perspective-origin:50% 40%; width:100%; max-width:340px; height:220px; margin:6px auto 4px; }
+.scale3d{ width:100%; height:100%; position:relative; transform-style:preserve-3d; animation:tumble3d 14s linear infinite; }
+.scale3d svg{ position:absolute; inset:0; width:100%; height:100%; filter:drop-shadow(0 10px 18px rgba(0,0,0,0.7)); }
+@keyframes tumble3d{
+  0%{ transform:rotateY(0deg) rotateX(8deg) rotateZ(0deg); }
+  25%{ transform:rotateY(90deg) rotateX(-6deg) rotateZ(2deg); }
+  50%{ transform:rotateY(180deg) rotateX(8deg) rotateZ(0deg); }
+  75%{ transform:rotateY(270deg) rotateX(-6deg) rotateZ(-2deg); }
+  100%{ transform:rotateY(360deg) rotateX(8deg) rotateZ(0deg); }
+}
+@media(prefers-reduced-motion: reduce){ .scale3d{ animation:none; } }
+
+/* --- 3D Naraka Chamber: rotating ring gallery --- */
+.chamber-wrap{ width:100%; max-width:680px; margin:20px auto; }
+.chamber-viewport{ perspective:1400px; width:100%; height:320px; position:relative; touch-action:pan-y; cursor:grab; }
+.chamber-viewport:active{ cursor:grabbing; }
+.chamber-ring{ width:100%; height:100%; position:absolute; transform-style:preserve-3d; transition:transform .1s linear; }
+.chamber-card{ position:absolute; top:50%; left:50%; width:168px; height:210px; margin:-105px 0 0 -84px;
+  background:linear-gradient(180deg,#210a09 0%, #0c0403 100%); border:1px solid var(--gold-dim); border-radius:8px;
+  display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:14px;
+  box-shadow:0 0 24px rgba(0,0,0,0.7), inset 0 0 30px rgba(140,18,32,0.15); backface-visibility:hidden; cursor:pointer;
+  transition:box-shadow .3s, border-color .3s; }
+.chamber-card:hover{ border-color:var(--ember); box-shadow:0 0 30px rgba(201,74,45,0.55), inset 0 0 30px rgba(140,18,32,0.25); }
+.chamber-card .cc-icon{ font-size:34px; margin-bottom:8px; filter:drop-shadow(0 0 8px rgba(201,74,45,0.6)); }
+.chamber-card .cc-name{ font-family:'Cinzel',serif; font-size:12px; letter-spacing:0.06em; color:var(--gold); text-transform:uppercase; line-height:1.4; }
+.chamber-card .cc-num{ font-size:9px; color:var(--ash); letter-spacing:0.15em; margin-top:6px; font-family:'Cinzel',serif; }
+.chamber-hint{ text-align:center; font-size:11px; color:var(--ash); letter-spacing:0.06em; margin-top:6px; font-family:'Cinzel',serif; text-transform:uppercase; }
+.chamber-floor{ position:absolute; left:0; right:0; bottom:-6px; height:60px; background:radial-gradient(ellipse at 50% 0%, rgba(140,18,32,0.25), transparent 70%); pointer-events:none; }
+
+/* --- Naraka detail modal --- */
+.naraka-modal-bg{ position:fixed; inset:0; z-index:80; background:rgba(4,2,2,0.86); backdrop-filter:blur(3px);
+  display:flex; align-items:center; justify-content:center; padding:20px; }
+.naraka-modal{ max-width:420px; width:100%; background:linear-gradient(180deg,#241009,#0a0403); border:1px solid var(--gold); border-radius:8px;
+  padding:26px; text-align:center; box-shadow:0 0 60px rgba(201,74,45,0.35); transform-style:preserve-3d; animation:modalRise .35s ease; }
+@keyframes modalRise{ from{ transform:translateY(30px) rotateX(10deg); opacity:0;} to{ transform:translateY(0) rotateX(0); opacity:1;} }
+.naraka-modal .nm-icon{ font-size:48px; filter:drop-shadow(0 0 14px rgba(201,74,45,0.7)); }
+
+/* --- Ultra Horror Mode toggle --- */
+.fab-row{ position:fixed; bottom:18px; right:18px; z-index:50; display:flex; flex-direction:column; gap:10px; align-items:flex-end; }
+.fab-row .fab-dread{ position:static; }
+.fab-mini{ width:44px; height:44px; font-size:17px; }
+
+body.ultra #vignette{ animation:heartbeatUltra 1.6s ease-in-out infinite; }
+@keyframes heartbeatUltra{
+  0%,100%{ box-shadow: inset 0 0 170px 40px rgba(0,0,0,0.9), inset 0 0 70px 14px rgba(140,18,32,0.25); }
+  45%{ box-shadow: inset 0 0 210px 60px rgba(0,0,0,0.95), inset 0 0 120px 30px rgba(201,74,45,0.45); }
+}
+body.ultra{ animation:chroma 0.18s steps(2,end) infinite; }
+@keyframes chroma{
+  0%{ filter:none; }
+  50%{ filter:drop-shadow(1px 0 0 rgba(255,0,40,0.12)) drop-shadow(-1px 0 0 rgba(0,180,255,0.08)); }
+  100%{ filter:none; }
+}
+@media(prefers-reduced-motion: reduce){ body.ultra, body.ultra #vignette{ animation:none !important; } }
+
+#static-noise{ position:fixed; inset:0; z-index:6; pointer-events:none; opacity:0; mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  transition:opacity .15s; }
+body.ultra #static-noise{ opacity:0.16; animation:staticflick 0.4s steps(3) infinite; }
+@keyframes staticflick{ 0%{opacity:.10;} 33%{opacity:.22;} 66%{opacity:.08;} 100%{opacity:.16;} }
+
+#crack-flash{ position:fixed; inset:0; z-index:90; pointer-events:none; opacity:0; background:
+  radial-gradient(ellipse at 50% 45%, rgba(255,255,255,0.06), transparent 60%),
+  repeating-conic-gradient(from 0deg, rgba(0,0,0,0.9) 0deg 1deg, transparent 1deg 14deg); mix-blend-mode:screen; }
+#crack-flash.hit{ animation:crackhit 0.32s ease-out; }
+@keyframes crackhit{ 0%{opacity:0;} 12%{opacity:0.85;} 30%{opacity:0.4;} 100%{opacity:0;} }
+
+#jumpscare-text{ position:fixed; inset:0; z-index:95; pointer-events:none; display:flex; align-items:center; justify-content:center;
+  opacity:0; background:rgba(0,0,0,0.55); }
+#jumpscare-text span{ font-family:'Cinzel Decorative',serif; font-size:clamp(28px,8vw,64px); color:#ff2233; text-shadow:0 0 30px #ff0000,0 0 60px #ff0000; letter-spacing:0.05em; text-transform:uppercase; }
+#jumpscare-text.show{ animation:jumpflash 0.9s ease-out; }
+@keyframes jumpflash{ 0%{opacity:0; transform:scale(1.4);} 8%{opacity:1; transform:scale(1);} 22%{opacity:1;} 40%{opacity:0;} 100%{opacity:0;} }
+
+/* --- Blood rain --- */
+#blood-rain{ position:fixed; inset:0; z-index:4; pointer-events:none; overflow:hidden; opacity:0; transition:opacity .4s; }
+#blood-rain.on{ opacity:1; }
+.drop{ position:absolute; top:-40px; width:2px; background:linear-gradient(180deg, rgba(140,18,32,0), rgba(201,74,45,0.9)); border-radius:2px; animation-name:fall; animation-timing-function:linear; animation-iteration-count:infinite; }
+@keyframes fall{ to{ transform:translateY(115vh); } }
+
+/* --- Cursor ember trail --- */
+.ember-particle{ position:fixed; z-index:97; pointer-events:none; border-radius:50%;
+  background:radial-gradient(circle, rgba(255,180,90,0.95), rgba(201,74,45,0.4) 60%, transparent 75%);
+  animation:emberFade 0.9s ease-out forwards; }
+@keyframes emberFade{ 0%{ opacity:0.9; transform:translateY(0) scale(1);} 100%{ opacity:0; transform:translateY(-24px) scale(0.3);} }
+
+/* --- Whisper caption --- */
+#whisper-caption{ position:fixed; bottom:90px; left:50%; transform:translateX(-50%); z-index:60; max-width:80vw; text-align:center;
+  font-family:'EB Garamond',serif; font-style:italic; font-size:15px; color:var(--ash); opacity:0; transition:opacity .8s; text-shadow:0 0 10px #000; pointer-events:none; }
+#whisper-caption.show{ opacity:0.9; }
+
+.btn-ultra{ background:linear-gradient(180deg,#1a0000 0%, #000 100%); border-color:#ff2233; color:#ffbdbd; }
+.btn-ultra.active{ box-shadow:0 0 0 0 rgba(255,0,40,0.6); animation:dangerpulse 1s ease-in-out infinite; }
+
+/* ============================================================
+   ADVANCED LAYER — WebGL hall, torches, CRT, karma meter,
+   achievements, interrogation, leaderboard, transitions
+   ============================================================ */
+
+/* --- Ambient fire particle canvas (always-on, behind content) --- */
+#fire-canvas{ position:fixed; inset:0; z-index:1; pointer-events:none; opacity:0.7; }
+
+/* --- WebGL 3D Hall --- */
+#hall3d-wrap{ position:relative; width:100%; max-width:720px; height:340px; margin:16px auto; border:1px solid var(--line); border-radius:8px; overflow:hidden; box-shadow:0 10px 40px rgba(0,0,0,0.6); background:#000; }
+#hall3d-canvas{ width:100%; height:100%; display:block; cursor:grab; }
+#hall3d-canvas:active{ cursor:grabbing; }
+#hall3d-wrap .hall3d-tag{ position:absolute; bottom:8px; left:10px; font-family:'Cinzel',serif; font-size:10px; letter-spacing:0.1em; color:var(--gold-dim); text-transform:uppercase; background:rgba(0,0,0,0.5); padding:3px 8px; border-radius:3px; }
+#hall3d-loading{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-family:'Cinzel',serif; letter-spacing:0.1em; color:var(--gold-dim); font-size:12px; text-transform:uppercase; }
+
+/* --- Corner torches --- */
+.torch{ position:fixed; z-index:2; width:220px; height:220px; pointer-events:none; border-radius:50%;
+  background:radial-gradient(circle, rgba(255,140,50,0.22), rgba(201,74,45,0.08) 45%, transparent 70%);
+  animation:torchflicker 2.6s ease-in-out infinite; }
+.torch.tl{ top:-80px; left:-80px; animation-delay:0.2s; }
+.torch.tr{ top:-80px; right:-80px; animation-delay:0.9s; }
+.torch.bl{ bottom:-80px; left:-80px; animation-delay:1.5s; }
+.torch.br{ bottom:-80px; right:-80px; animation-delay:0.5s; }
+@keyframes torchflicker{ 0%,100%{ opacity:0.55; transform:scale(1);} 20%{opacity:0.85; transform:scale(1.05);} 35%{opacity:0.4; transform:scale(0.96);} 55%{opacity:0.9; transform:scale(1.08);} 75%{opacity:0.5; transform:scale(0.98);} }
+@media(prefers-reduced-motion: reduce){ .torch{ animation:none; } }
+
+/* --- CRT scanline mode --- */
+body.crt::after{ content:""; position:fixed; inset:0; z-index:91; pointer-events:none;
+  background:repeating-linear-gradient(0deg, rgba(0,0,0,0.18) 0 1px, transparent 1px 3px);
+  mix-blend-mode:multiply; }
+body.crt #vignette{ box-shadow: inset 0 0 200px 60px rgba(0,0,0,0.95), inset 0 0 90px 20px rgba(0,255,140,0.05); }
+body.crt{ filter:contrast(1.08) saturate(0.9); }
+
+/* --- Glitch confession input --- */
+.glitch-type{ animation:inputGlitch 0.28s steps(2,end); text-shadow:1px 0 0 #ff2233, -1px 0 0 #2fb8ff; }
+@keyframes inputGlitch{ 0%{ transform:translateX(0);} 30%{ transform:translateX(-2px) skewX(-2deg);} 60%{ transform:translateX(2px) skewX(2deg);} 100%{ transform:translateX(0);} }
+
+/* --- Karma meter --- */
+.karma-meter-wrap{ width:100%; margin:14px 0 4px; }
+.karma-meter{ width:100%; height:16px; border-radius:10px; background:rgba(0,0,0,0.5); border:1px solid var(--line); overflow:hidden; position:relative; }
+.karma-meter-fill{ height:100%; border-radius:10px; background:linear-gradient(90deg, var(--gold) 0%, var(--ember) 55%, var(--blood) 100%); transition:width .8s ease, background .8s ease; box-shadow:0 0 12px rgba(201,74,45,0.5); }
+.karma-labels{ display:flex; justify-content:space-between; font-family:'Cinzel',serif; font-size:10px; letter-spacing:0.08em; text-transform:uppercase; color:var(--ash); margin-top:4px; }
+
+/* --- Achievements --- */
+.ach-grid{ display:grid; grid-template-columns:1fr; gap:10px; margin-top:12px; }
+@media(min-width:640px){ .ach-grid{ grid-template-columns:1fr 1fr; } }
+.ach-card{ display:flex; gap:12px; align-items:center; padding:12px 14px; border:1px solid var(--line); border-radius:6px; background:rgba(0,0,0,0.3); opacity:0.4; filter:grayscale(1); transition:all .3s; }
+.ach-card.unlocked{ opacity:1; filter:none; border-color:var(--gold); box-shadow:0 0 14px rgba(212,175,55,0.15); }
+.ach-card .ach-icon{ font-size:26px; }
+.ach-card .ach-name{ font-family:'Cinzel',serif; font-size:13px; color:var(--gold); text-transform:uppercase; letter-spacing:0.04em; }
+.ach-card .ach-desc{ font-size:12px; color:var(--ash); margin-top:2px; }
+#ach-toast{ position:fixed; top:16px; left:50%; transform:translateX(-50%) translateY(-40px); z-index:100; background:linear-gradient(180deg,#2a1608,#120802);
+  border:1px solid var(--gold); border-radius:6px; padding:10px 18px; display:flex; gap:10px; align-items:center; opacity:0; transition:all .5s; box-shadow:0 10px 30px rgba(0,0,0,0.6); }
+#ach-toast.show{ opacity:1; transform:translateX(-50%) translateY(0); }
+
+/* --- Omen ticker --- */
+#omen-ticker{ width:100%; max-width:520px; margin:10px auto 0; overflow:hidden; border:1px solid var(--line); border-radius:20px; background:rgba(0,0,0,0.3); padding:8px 16px; }
+#omen-ticker .omen-line{ font-size:12px; color:var(--ash); font-style:italic; text-align:center; transition:opacity .5s; }
+
+/* --- Blood page transition --- */
+#page-transition{ position:fixed; inset:0; z-index:98; pointer-events:none; opacity:0;
+  background:radial-gradient(circle at 50% 30%, var(--blood) 0%, var(--blood-deep) 55%, #050101 100%); }
+#page-transition.wipe{ animation:pageWipe .55s ease; }
+@keyframes pageWipe{ 0%{opacity:0;} 40%{opacity:1;} 100%{opacity:0;} }
+
+/* --- Yama silhouette --- */
+#yama-silhouette{ position:fixed; bottom:-4%; left:50%; width:min(420px,60vw); height:60vh; z-index:1; pointer-events:none;
+  opacity:0.14; transform:translateX(-50%); transition:transform 0.4s ease; filter:drop-shadow(0 0 40px rgba(140,18,32,0.4)); }
+
+/* --- Interrogation screen --- */
+.interrogation-q{ margin:18px 0; }
+.interrogation-q .iq-text{ font-family:'Cinzel',serif; letter-spacing:0.03em; color:var(--gold); font-size:16px; margin-bottom:10px; }
+.iq-options{ display:flex; flex-direction:column; gap:8px; }
+
+/* --- Leaderboard chart --- */
+#leaderboard-canvas{ width:100%; max-width:680px; height:340px; margin:14px auto; display:block; }
+
+.btn-share{ background:linear-gradient(180deg,#0a2a1a,#041008); border-color:#2fb87a; color:#c9f0da; }
+.btn-share:hover{ background:linear-gradient(180deg,#0d3520,#041008); }
+
+/* --- Movie Library --- */
+.movie-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:18px; margin-top:16px; }
+.movie-card{ background:linear-gradient(180deg,#1c0d09,#0a0403); border:1px solid var(--line); border-radius:8px; overflow:hidden;
+  box-shadow:0 8px 24px rgba(0,0,0,0.5); transition:transform .25s, box-shadow .25s, border-color .25s; }
+.movie-card:hover{ transform:translateY(-4px); border-color:var(--gold-dim); box-shadow:0 14px 34px rgba(0,0,0,0.65), 0 0 20px rgba(201,74,45,0.15); }
+.movie-poster{ width:100%; aspect-ratio:2/3; object-fit:cover; display:block; background:linear-gradient(160deg,#2a1208,#0a0403); }
+.movie-poster-fallback{ width:100%; aspect-ratio:2/3; display:flex; align-items:center; justify-content:center; font-size:52px;
+  background:radial-gradient(circle at 50% 30%, rgba(201,74,45,0.25), transparent 70%), linear-gradient(160deg,#2a1208,#0a0403); }
+.movie-body{ padding:12px 14px 16px; }
+.movie-title{ font-family:'Cinzel',serif; font-size:14px; color:var(--gold); letter-spacing:0.02em; line-height:1.3; }
+.movie-meta{ font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:var(--ash); margin:4px 0 8px; }
+.movie-desc{ font-size:12.5px; color:#d8c8b4; line-height:1.5; }
+
+/* --- Admin movie form --- */
+.movie-upload-row{ display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-top:6px; }
+.movie-thumb-preview{ width:70px; height:100px; border-radius:4px; object-fit:cover; border:1px solid var(--line); background:#150a08; }
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+
+<div id="fog-layer"><div class="fog-a"></div><div class="fog-b"></div></div>
+<div id="vignette"></div>
+<div class="eye-decor" style="top:12%; left:8%; font-size:26px;">👁️</div>
+<div class="eye-decor" style="top:70%; right:10%; font-size:22px; animation-delay:5s;">👁️</div>
+
+<video id="intro-vid" class="bg-video hidden" src="intro.mp4" loop playsinline></video>
+<video id="judge-vid" class="bg-video hidden" src="judgement.mp4" playsinline></video>
+
+<canvas id="fire-canvas"></canvas>
+<div class="torch tl"></div><div class="torch tr"></div><div class="torch bl"></div><div class="torch br"></div>
+<svg id="yama-silhouette" viewBox="0 0 200 340" xmlns="http://www.w3.org/2000/svg" fill="#8c1220">
+  <path d="M100 10c-16 0-28 14-28 30 0 12 6 20 6 20s-34 14-40 46c-4 22 4 40 4 40l-6 160c0 10 8 18 18 18h92c10 0 18-8 18-18l-6-160s8-18 4-40c-6-32-40-46-40-46s6-8 6-20c0-16-12-30-28-30z"/>
+</svg>
+<div id="page-transition"></div>
+<div id="ach-toast"><span style="font-size:22px;">🏆</span><div><div style="font-family:'Cinzel',serif; font-size:12px; color:var(--gold); letter-spacing:0.06em;">ACHIEVEMENT UNLOCKED</div><div id="ach-toast-name" style="font-size:13px; color:var(--bone);"></div></div></div>
+
+<div id="toast"></div>
+<div id="static-noise"></div>
+<div id="crack-flash"></div>
+<div id="jumpscare-text"><span id="jumpscare-msg">👁️ IT SEES YOU 👁️</span></div>
+<div id="blood-rain"></div>
+<div id="whisper-caption"></div>
+
+<div class="fab-row">
+  <button class="fab-dread fab-mini" id="crt-toggle" onclick="toggleCRT()" title="Toggle CRT Mode">📺</button>
+  <button class="fab-dread fab-mini" id="soundscape-toggle" onclick="toggleSoundscape()" title="Toggle Soundscape">🌫️</button>
+  <button class="fab-dread fab-mini" id="ultra-toggle" onclick="toggleUltra()" title="Toggle Ultra Horror Mode">💀</button>
+  <button class="fab-dread fab-mini" id="rain-toggle" onclick="toggleBloodRain()" title="Toggle Blood Rain">🩸</button>
+  <button class="fab-dread fab-mini" onclick="ringDeathBell()" title="Ring the Death Bell">🔔</button>
+  <button class="fab-dread fab-mini" onclick="whisperVoid()" title="Whisper of the Damned">🗣️</button>
+  <button class="fab-dread" id="dread-toggle" onclick="toggleDread()" title="Toggle Ambient Dread">🔇</button>
+</div>
+
+<!-- ============ NAV (hidden on immersive screens) ============ -->
+<nav class="top-nav hidden" id="top-nav">
+  <button class="nav-btn" data-target="home-screen" onclick="go('home-screen')">🏛️ <span data-i18n="nav.home">Hall</span></button>
+  <button class="nav-btn" data-target="entry-screen" onclick="go('entry-screen')">✍️ <span data-i18n="nav.confess">Confess</span></button>
+  <button class="nav-btn" data-target="naraka3d-screen" onclick="go('naraka3d-screen')">🌀 Chamber 3D</button>
+  <button class="nav-btn" data-target="movies-screen" onclick="go('movies-screen')">🎬 Movies</button>
+  <button class="nav-btn" data-target="about-screen" onclick="go('about-screen')">📖 <span data-i18n="nav.about">About</span></button>
+  <button class="nav-btn" data-target="yugas-screen" onclick="go('yugas-screen')">🕉️ <span data-i18n="nav.yugas">Yugas</span></button>
+  <button class="nav-btn" data-target="notes-screen" onclick="go('notes-screen')">ℹ️ <span data-i18n="nav.notes">Notes</span></button>
+  <button class="nav-btn" data-target="achievements-screen" onclick="go('achievements-screen')">🏆 Achievements</button>
+  <button class="nav-btn" data-target="leaderboard-screen" onclick="go('leaderboard-screen')">📊 Leaderboard</button>
+  <button class="nav-btn" data-target="admin-screen" onclick="go('admin-screen')">🔐 <span data-i18n="nav.admin">Admin</span></button>
+  <select id="lang-select-nav" onchange="setLang(this.value)" style="width:auto; padding:6px 10px; font-size:12px; margin-left:6px;">
+    <option value="en">ENGLISH</option>
+    <option value="hi">हिन्दी</option>
+    <option value="kn">ಕನ್ನಡ</option>
+  </select>
+</nav>
+
+<!-- ============ 1. START ============ -->
+<div id="start-screen" class="screen center-screen">
+  <div class="container">
+    <div class="eyebrow flicker-text">⚖️ Naraka Judgment Engine · v3.0</div>
+    <h1 class="font-display blood-drip flicker-text" style="font-size:clamp(28px,7vw,52px); color:var(--gold); text-shadow:0 0 30px rgba(201,74,45,0.8), 0 0 60px rgba(140,18,32,0.5);">YAMA DHARMA TERMINAL</h1>
+    <div class="scale-rule">
+      <svg viewBox="0 0 64 64" fill="none" stroke="#d4af37" stroke-width="2.5"><path d="M32 6v40M14 20h36M32 12l-14 8 14 8 14-8-14-8z" stroke-linejoin="round"/><circle cx="14" cy="24" r="6"/><circle cx="50" cy="24" r="6"/><path d="M20 56h24" stroke-linecap="round"/></svg>
+    </div>
+    <p style="color:#c9b8a0; font-style:italic;">The veil grows thin. Every soul's deeds are weighed against Dharma, and the Garuda Purana's ancient reckoning is rendered anew — for you.</p>
+    <div class="warn-band">⚠ Beyond this point, your karma is recorded ⚠</div>
+    <button class="btn btn-skull btn-glitch" onclick="triggerHaptic(50); unlockAudio()"><span class="skull-ico">💀</span> ENTER THE JUDGMENT IF YOU DARE 💀</button>
+    <p class="small-note">Contains dramatized mythological content from the Garuda Purana, presented for educational and reflective purposes.</p>
+  </div>
+</div>
+
+<!-- ============ 2. INTRO ============ -->
+<div id="intro-screen" class="screen center-screen hidden">
+  <div id="timer">⏳ Loading...</div>
+  <button id="enter-btn" class="btn btn-gold hidden" onclick="startApp()">👁️ ENTER THE JUDGMENT HALL 👁️</button>
+  <button onclick="startApp()" class="btn-ghost btn" style="background:transparent; box-shadow:none;">⏭️ SKIP INTRO</button>
+</div>
+
+<!-- ============ 3. HOME / DASHBOARD ============ -->
+<div id="home-screen" class="screen hidden">
+  <div class="container">
+    <h1 class="font-display" style="text-align:center; color:var(--gold);" data-i18n="home.title">The Judgment Hall</h1>
+    <div class="scene3d"><div class="scale3d">
+      <svg viewBox="0 0 64 64" fill="none" stroke="#d4af37" stroke-width="2"><path d="M32 4v46M12 18h40M32 11l-16 9 16 9 16-9-16-9z"/><circle cx="12" cy="22" r="7"/><circle cx="52" cy="22" r="7"/><path d="M18 56h28" stroke-linecap="round"/></svg>
+    </div></div>
+
+    <div id="hall3d-wrap">
+      <div id="hall3d-loading">⏳ Rendering Yamaloka...</div>
+      <canvas id="hall3d-canvas"></canvas>
+      <div class="hall3d-tag">🕯️ Live 3D Hall · drag to look around</div>
+    </div>
+
+    <div class="stat-grid" id="dashboard-stats"></div>
+
+    <div class="karma-meter-wrap">
+      <div class="karma-meter"><div class="karma-meter-fill" id="karma-fill" style="width:50%;"></div></div>
+      <div class="karma-labels"><span>☀️ Punya (Merit)</span><span id="karma-score-label">Balanced</span><span>🩸 Paapa (Sin)</span></div>
+    </div>
+
+    <div id="omen-ticker"><div class="omen-line" id="omen-line">Silence hangs over Yamaloka...</div></div>
+
+    <div style="text-align:center; margin-top:10px;">
+      <button class="btn btn-danger btn-glitch" onclick="go('entry-screen')">✍️ <span data-i18n="home.begin">Begin Confession</span></button>
+      <button class="btn btn-skull btn-glitch" onclick="go('naraka3d-screen')"><span class="skull-ico">🌀</span> Enter the 3D Naraka Chamber</button>
+      <button class="btn btn-spectral" onclick="go('about-screen')">📖 <span data-i18n="home.aboutbtn">About the Garuda Purana</span></button>
+      <button class="btn btn-spectral" onclick="go('yugas-screen')">🕉️ <span data-i18n="home.yugasbtn">The Four Yugas</span></button>
+      <button class="btn btn-spectral" onclick="go('notes-screen')">ℹ️ <span data-i18n="home.notesbtn">Educational Notes</span></button>
+      <button class="btn btn-spectral" onclick="go('achievements-screen')">🏆 Achievements</button>
+      <button class="btn btn-spectral" onclick="go('leaderboard-screen')">📊 Leaderboard</button>
+      <button class="btn btn-spectral" onclick="go('movies-screen')">🎬 Mythology Movies & Series</button>
+    </div>
+    <div style="text-align:center; margin-top:6px;">
+      <button class="btn btn-ultra btn-sm" id="ultra-home-btn" onclick="toggleUltra()">💀 Ultra Horror Mode</button>
+      <button class="btn btn-sm" onclick="toggleBloodRain()">🩸 Blood Rain</button>
+      <button class="btn btn-sm" onclick="ringDeathBell()">🔔 Ring the Death Bell</button>
+      <button class="btn btn-sm" onclick="whisperVoid()">🗣️ Whisper of the Damned</button>
+      <button class="btn btn-sm" onclick="toggleCRT()">📺 CRT Mode</button>
+      <button class="btn btn-sm" onclick="toggleSoundscape()">🌫️ Soundscape</button>
+    </div>
+    <p class="footer-note" data-i18n="home.footer">28 Narakas · 3 Languages · Offline-Capable · Ultra Horror Engine</p>
+  </div>
+</div>
+
+<!-- ============ 4. ENTRY / CONFESSION ============ -->
+<div id="entry-screen" class="screen hidden">
+  <div class="container">
+    <h1 class="font-display" style="text-align:center; color:var(--gold); font-size:30px;" data-i18n="entry.title">Confess Before Chitragupta's Ledger</h1>
+
+    <div class="panel">
+      <label class="field-label" data-i18n="entry.name">Name of the Soul</label>
+      <input type="text" id="name" placeholder="Enter your full name">
+      <label class="field-label" data-i18n="entry.age">Age at Judgment</label>
+      <input type="number" id="age" placeholder="Enter your age" min="1" max="130">
+      <label class="field-label" data-i18n="entry.confession">Confession</label>
+      <textarea id="confession" placeholder="Confess your deeds in your own words..."></textarea>
+      <div class="error-text" id="entry-error"></div>
+
+      <div style="display:flex; flex-wrap:wrap; gap:8px; margin-top:10px;">
+        <button class="btn btn-sm btn-glitch" onclick="calculateKarma()">⚖️ <span data-i18n="entry.autoweigh">Auto-Weigh by Karma</span></button>
+        <button class="btn btn-sm btn-spectral" id="voice-btn" onclick="startVoiceConfession()">🎙️ <span data-i18n="entry.voice">Whisper Confession</span></button>
+      </div>
+
+      <label class="field-label" style="margin-top:18px;" data-i18n="entry.selectlang">Language</label>
+      <select id="lang-select" onchange="setLang(this.value)">
+        <option value="en">ENGLISH</option>
+        <option value="hi">हिन्दी (HINDI)</option>
+        <option value="kn">ಕನ್ನಡ (KANNADA)</option>
+      </select>
+
+      <label class="field-label" style="margin-top:18px;" data-i18n="entry.selectsin">Select the Sin Committed</label>
+      <div id="sin-list"></div>
+    </div>
+
+    <div style="text-align:center;">
+      <button class="btn btn-danger btn-glitch" onclick="beginInterrogation()">🔥 <span data-i18n="entry.pronounce">PRONOUNCE JUDGMENT</span> 🔥</button>
+      <button class="btn-ghost btn" onclick="go('home-screen')">↩ <span data-i18n="common.back">Back to Hall</span></button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 4.5 CHITRAGUPTA'S INTERROGATION ============ -->
+<div id="interrogation-screen" class="screen center-screen hidden">
+  <div class="container">
+    <div class="eyebrow flicker-text">📜 Chitragupta Reads the Ledger</div>
+    <h2 class="font-display" style="color:var(--gold);">Answer honestly. He already knows.</h2>
+    <div id="interrogation-body"></div>
+  </div>
+</div>
+
+<!-- ============ 5. SOUL WEIGHING ANIMATION ============ -->
+<div id="weighing-screen" class="screen center-screen hidden">
+  <div class="container">
+    <h2 class="font-display" style="color:var(--gold);" data-i18n="weigh.title">The Scale of Dharma Turns...</h2>
+    <div class="scale-stage">
+      <svg viewBox="0 0 420 260" xmlns="http://www.w3.org/2000/svg">
+        <line x1="210" y1="70" x2="210" y2="230" stroke="#8a6f24" stroke-width="6"/>
+        <polygon points="180,235 240,235 225,255 195,255" fill="#4a0710" stroke="#d4af37" stroke-width="2"/>
+        <g id="beam-group" class="beam">
+          <rect x="60" y="66" width="300" height="8" rx="4" fill="#d4af37"/>
+          <circle cx="210" cy="70" r="10" fill="#d4af37"/>
+          <g id="pan-left" class="pan-left">
+            <line x1="80" y1="72" x2="80" y2="150" stroke="#8a6f24" stroke-width="2"/>
+            <ellipse cx="80" cy="158" rx="46" ry="14" fill="none" stroke="#c94a2d" stroke-width="3"/>
+            <text x="80" y="163" text-anchor="middle" font-size="22" id="pan-left-icon">📜</text>
+          </g>
+          <g id="pan-right" class="pan-right">
+            <line x1="340" y1="72" x2="340" y2="150" stroke="#8a6f24" stroke-width="2"/>
+            <ellipse cx="340" cy="158" rx="46" ry="14" fill="none" stroke="#c94a2d" stroke-width="3"/>
+            <text x="340" y="163" text-anchor="middle" font-size="22" id="pan-right-icon">🪶</text>
+          </g>
+        </g>
+      </svg>
+    </div>
+    <p class="glow-text" id="weigh-status" style="font-family:'Cinzel',serif; letter-spacing:0.08em;">CALCULATING KARMIC WEIGHT...</p>
+  </div>
+</div>
+
+<!-- ============ 6. FINAL JUDGMENT ============ -->
+<div id="final-screen" class="screen center-screen hidden">
+  <div class="container">
+    <div class="eyebrow flicker-text" data-i18n="final.eyebrow">The Verdict of Yamaraja</div>
+    <h1 id="v-name" class="font-display result-title blood-drip"></h1>
+    <p id="v-desc" class="result-desc"></p>
+    <div class="panel" id="modern-note-panel" style="text-align:left;">
+      <div class="eyebrow">⚖️ Modern Legal Parallel (English)</div>
+      <p id="v-modern" style="color:#e7d9c4; font-size:15px;"></p>
+    </div>
+
+    <div id="certificate-wrap">
+      <canvas id="cert-canvas" width="900" height="620"></canvas>
+    </div>
+    <div>
+      <button class="btn btn-gold btn-sm" onclick="downloadCertificate()">📄 <span data-i18n="final.download">Download Certificate</span></button>
+      <button class="btn btn-share btn-sm" onclick="shareVerdict()">📤 Share Verdict</button>
+      <button class="btn btn-sm" onclick="window.print()">🖨️ <span data-i18n="final.print">Print</span></button>
+      <button class="btn btn-primary btn-sm" onclick="resetJourney()">↩️ <span data-i18n="final.return">Return to Source</span></button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 6.5 3D NARAKA CHAMBER ============ -->
+<div id="naraka3d-screen" class="screen hidden">
+  <div class="container">
+    <div class="eyebrow flicker-text">🌀 Interactive · Drag to Rotate</div>
+    <h1 class="font-display" style="text-align:center; color:var(--gold);">The 3D Chamber of the Twenty-Eight Hells</h1>
+    <p style="color:#c9b8a0; font-style:italic; text-align:center;">Drag or swipe the ring. Tap any naraka to peer inside its punishment.</p>
+    <div class="chamber-wrap">
+      <div class="chamber-viewport" id="chamber-viewport">
+        <div class="chamber-ring" id="chamber-ring"></div>
+        <div class="chamber-floor"></div>
+      </div>
+      <p class="chamber-hint">⚖️ 28 chambers · drag left / right · click a chamber to enter</p>
+    </div>
+    <div style="text-align:center;">
+      <button class="btn-ghost btn" onclick="go('home-screen')">↩ Back to Hall</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 7. ABOUT GARUDA PURANA ============ -->
+<div id="about-screen" class="screen hidden">
+  <div class="container info-page scary">
+    <h1 class="font-display flicker-text" style="color:var(--gold);" data-i18n="about.h1">About the Garuda Purana</h1>
+    <div class="scale-rule"></div>
+    <p data-i18n="about.p1">The Garuda Purana is one of the eighteen Mahapuranas of Hindu literature, presented as a dialogue between Lord Vishnu and Garuda, his eagle mount. It is especially renowned for its second section, which describes the soul's journey after death: the passage through Yamaloka, the reckoning before Yamaraja and his scribe Chitragupta, and the various Narakas (hells) said to correspond to particular categories of wrongdoing.</p>
+    <p data-i18n="about.p2">Traditionally, the text is recited during funeral rites (the "Garuda Purana Path") to guide mourners in reflecting on ethical living, duty (dharma), and the consequences of one's actions (karma). Its vivid imagery is best understood as moral allegory rather than literal cosmology — a teaching device meant to encourage compassion, honesty, and restraint in this life.</p>
+
+    <div class="panel blood-drip">
+      <div class="eyebrow" data-i18n="about.journeyh">The Soul's Journey Through Yamaloka</div>
+      <p data-i18n="about.journeyp">Upon death, it is said the soul (jiva) leaves the body and is led by two fearsome messengers, the Yamadutas, on a long journey southward to Yamaloka, the realm of Yamaraja. The road is described as harsh and unlit, stretching across 86,000 yojanas, where the soul relives the weight of its own choices before ever reaching the hall of judgment.</p>
+    </div>
+
+    <div class="panel">
+      <div class="eyebrow" data-i18n="about.chitrah">Chitragupta, the Celestial Scribe</div>
+      <p data-i18n="about.chitrap">Seated beside Yamaraja is Chitragupta, keeper of the cosmic ledger, said to record every act, word, and intention of every living being across a lifetime. When the soul arrives, this ledger is read aloud — nothing omitted, nothing exaggerated — and it is against this record, not mere accusation, that judgment is passed.</p>
+    </div>
+
+    <div class="panel blood-drip">
+      <div class="eyebrow" data-i18n="about.vaitaranih">The River Vaitarani</div>
+      <p data-i18n="about.vaitaranip">Between the world of the living and the halls of judgment flows the Vaitarani, a river described as thick with blood, bone, and grief — impassable to the guilty, who are pulled under by their own unresolved deeds, and crossable by the righteous, who are said to hold fast to the tail of a ritually gifted cow as they wade through.</p>
+    </div>
+
+    <div class="panel">
+      <div class="eyebrow" data-i18n="about.pretah">Preta: The Waiting Soul</div>
+      <p data-i18n="about.pretap">For a period traditionally described as twelve to thirteen days after death, the soul is said to linger as a preta, a formless, hungry, in-between being, dependent on the living performing shraddha rites (ritual offerings of food, water, and remembrance) to build it a symbolic new body strong enough to complete its journey. It is this belief that gives the Garuda Purana its central role in Hindu funeral tradition even today.</p>
+    </div>
+
+    <div class="panel blood-drip">
+      <div class="eyebrow" data-i18n="about.punarh">Punarjanma: The Wheel Turns Again</div>
+      <p data-i18n="about.punarp">Punishment in the Narakas is described as neither eternal nor final. Once the weight of a particular sin has been "worked off," the text holds that the soul is released for punarjanma — rebirth — into a new body and circumstance shaped by whatever karma remains outstanding. Even hell, in this framework, is a corrective passage rather than a permanent sentence.</p>
+    </div>
+
+    <div class="panel">
+      <div class="eyebrow" data-i18n="about.structh">Structure of the Text</div>
+      <p data-i18n="about.structp">The Purana is broadly divided into the Purva Khanda (covering rituals, dharma, astrology, and worldly conduct) and the Uttara Khanda (covering the afterlife journey, judgment, and rebirth). This application draws dramatized, simplified illustrations from the Uttara Khanda's descriptions of the Narakas.</p>
+    </div>
+
+    <p class="small-note" data-i18n="about.disclaimer">This app is a creative and educational interpretation, not a substitute for the original scripture or scholarly translation. Depictions of punishment are symbolic teaching devices from a centuries-old moral tradition, not literal predictions.</p>
+    <div style="text-align:center; margin-top:20px;"><button class="btn btn-glitch" onclick="go('home-screen')" data-i18n="common.backhall">↩ Back to Hall</button></div>
+  </div>
+</div>
+
+<!-- ============ 8. FOUR YUGAS ============ -->
+<div id="yugas-screen" class="screen hidden">
+  <div class="container info-page scary">
+    <h1 class="font-display flicker-text" style="color:var(--gold);" data-i18n="yugas.h1">The Four Yugas</h1>
+    <div class="scale-rule"></div>
+    <p data-i18n="yugas.intro">Hindu cosmology describes time as cyclical, unfolding across four great ages (Yugas) that together form one Mahayuga. Each age is said to see a gradual decline in dharma (righteousness), from an age of near-perfect virtue to one of moral struggle.</p>
+    <div class="yuga-grid">
+      <div class="yuga-card blood-drip"><h3>Satya Yuga (Krita Yuga)</h3><p data-i18n="yugas.satya">The age of truth. Dharma stands on all four legs; humanity lives in virtue, wisdom, and near-perfect harmony. Traditionally said to last 1,728,000 years.</p></div>
+      <div class="yuga-card"><h3>Treta Yuga</h3><p data-i18n="yugas.treta">Dharma diminishes by a quarter. Virtue still predominates, but sacrifice, duty, and effort become necessary to maintain order. Traditionally said to last 1,296,000 years.</p></div>
+      <div class="yuga-card"><h3>Dvapara Yuga</h3><p data-i18n="yugas.dvapara">Dharma stands on two legs. Virtue and vice are balanced; disease, conflict, and moral ambiguity increase. Traditionally said to last 864,000 years.</p></div>
+      <div class="yuga-card blood-drip"><h3>Kali Yuga</h3><p data-i18n="yugas.kali">The current age, in which dharma stands on a single leg. Marked by conflict, materialism, and moral decline, yet also offering the swiftest path to spiritual growth through sincere effort. Traditionally said to last 432,000 years.</p></div>
+    </div>
+
+    <div class="panel" style="margin-top:20px;">
+      <div class="eyebrow" data-i18n="yugas.tableh">Comparative Table</div>
+      <div style="overflow-x:auto;">
+        <table class="admin-table">
+          <tr><th data-i18n="yugas.col.yuga">Yuga</th><th data-i18n="yugas.col.dharma">Dharma (of 4)</th><th data-i18n="yugas.col.duration">Duration (human years)</th><th data-i18n="yugas.col.trait">Defining Trait</th></tr>
+          <tr><td>Satya</td><td>4/4</td><td>1,728,000</td><td data-i18n="yugas.trait.satya">Truth &amp; wisdom</td></tr>
+          <tr><td>Treta</td><td>3/4</td><td>1,296,000</td><td data-i18n="yugas.trait.treta">Duty &amp; sacrifice</td></tr>
+          <tr><td>Dvapara</td><td>2/4</td><td>864,000</td><td data-i18n="yugas.trait.dvapara">Balance &amp; doubt</td></tr>
+          <tr><td>Kali</td><td>1/4</td><td>432,000</td><td data-i18n="yugas.trait.kali">Conflict &amp; decline</td></tr>
+        </table>
+      </div>
+      <p class="small-note" data-i18n="yugas.tablenote">Together the four Yugas total 4,320,000 years — one Mahayuga. 1,000 Mahayugas make one Kalpa, described as a single day in the life of Brahma.</p>
+    </div>
+
+    <div class="panel blood-drip">
+      <div class="eyebrow" data-i18n="yugas.kalih">We Are Living in Kali Yuga</div>
+      <p data-i18n="yugas.kalip">Tradition holds that Kali Yuga began roughly 5,000 years ago, at the moment of Krishna's departure from the earthly realm, and that we remain near its very beginning — with many thousands of years still to unfold. It is described as an age where truth erodes quietly, where shortcuts are mistaken for wisdom, and where the line between virtue and self-interest blurs with each generation.</p>
+    </div>
+
+    <div class="panel">
+      <div class="eyebrow" data-i18n="yugas.kalkih">The Promise of Kalki</div>
+      <p data-i18n="yugas.kalkip">Several Puranas, including the Garuda Purana's broader tradition, foretell that at the darkest close of Kali Yuga, Vishnu will descend as Kalki, a warrior riding a white horse, to end corruption and restore dharma — after which the cycle begins again with a new Satya Yuga. The wheel of time, in this view, never truly ends; it only turns.</p>
+    </div>
+
+    <p class="small-note" data-i18n="yugas.note">These durations are drawn from traditional cosmological texts and are presented here as cultural and philosophical context, not as scientific claims.</p>
+    <div style="text-align:center; margin-top:20px;"><button class="btn btn-glitch" onclick="go('home-screen')" data-i18n="common.backhall">↩ Back to Hall</button></div>
+  </div>
+</div>
+
+<!-- ============ 9. EDUCATIONAL NOTES ============ -->
+<div id="notes-screen" class="screen hidden">
+  <div class="container info-page">
+    <h1 class="font-display" style="color:var(--gold);" data-i18n="notes.h1">Educational Notes</h1>
+    <div class="scale-rule"></div>
+    <p data-i18n="notes.intro">The Garuda Purana's Narakas are moral allegories describing consequences in the afterlife. For reflection, each entry below is paired with a real-world legal or civic consequence that a comparable act can carry today. These are general illustrations, not legal advice, and laws vary widely by country and jurisdiction.</p>
+    <div class="panel" id="notes-list" style="max-height:480px; overflow-y:auto;"></div>
+    <p class="small-note" data-i18n="notes.disclaimer">For actual legal questions, consult a qualified lawyer in your jurisdiction. This section is offered purely for reflective and educational purposes.</p>
+    <div style="text-align:center; margin-top:20px;"><button class="btn" onclick="go('home-screen')" data-i18n="common.backhall">↩ Back to Hall</button></div>
+  </div>
+</div>
+
+<!-- ============ 10. ADMIN PANEL ============ -->
+<div id="admin-screen" class="screen hidden">
+  <div class="container">
+    <h1 class="font-display" style="color:var(--gold); text-align:center;" data-i18n="admin.h1">Chitragupta's Admin Ledger</h1>
+    <div class="scale-rule"></div>
+
+    <div id="admin-login" class="panel" style="text-align:center;">
+      <label class="field-label" data-i18n="admin.pw">Admin Passcode</label>
+      <input type="text" id="admin-pass" placeholder="Enter passcode" style="max-width:280px; margin:0 auto;">
+      <div class="error-text" id="admin-error"></div>
+      <button class="btn btn-primary btn-sm" onclick="adminLogin()">🔐 <span data-i18n="admin.login">Unlock Ledger</span></button>
+      <p class="small-note" data-i18n="admin.hint">Default demo passcode: yama108</p>
+    </div>
+
+    <div id="admin-panel" class="hidden">
+      <div class="stat-grid" id="admin-stats"></div>
+
+      <div class="panel">
+        <div class="eyebrow" data-i18n="admin.addh">Add / Edit Sin Entry</div>
+        <input type="hidden" id="edit-id">
+        <label class="field-label">Sin (EN)</label><input type="text" id="f-sin-en" placeholder="e.g. Slander 🗣️">
+        <label class="field-label">Sin (HI)</label><input type="text" id="f-sin-hi" placeholder="हिन्दी में पाप">
+        <label class="field-label">Sin (KN)</label><input type="text" id="f-sin-kn" placeholder="ಕನ್ನಡದಲ್ಲಿ ಪಾಪ">
+        <label class="field-label">Naraka Name (EN)</label><input type="text" id="f-vname-en" placeholder="e.g. 🔥 KAALASUTRA">
+        <label class="field-label">Naraka Name (HI)</label><input type="text" id="f-vname-hi" placeholder="नरक का नाम">
+        <label class="field-label">Naraka Name (KN)</label><input type="text" id="f-vname-kn" placeholder="ನರಕದ ಹೆಸರು">
+        <label class="field-label">Punishment (EN)</label><textarea id="f-vdesc-en" placeholder="Description in English"></textarea>
+        <label class="field-label">Punishment (HI)</label><textarea id="f-vdesc-hi" placeholder="विवरण हिन्दी में"></textarea>
+        <label class="field-label">Punishment (KN)</label><textarea id="f-vdesc-kn" placeholder="ಕನ್ನಡದಲ್ಲಿ ವಿವರಣೆ"></textarea>
+        <label class="field-label">Modern Legal Parallel (EN)</label><textarea id="f-modern" placeholder="Comparable real-world legal consequence"></textarea>
+        <div style="margin-top:10px;">
+          <button class="btn btn-gold btn-sm" onclick="saveSinEntry()">💾 <span data-i18n="admin.save">Save Entry</span></button>
+          <button class="btn-ghost btn btn-sm" onclick="clearAdminForm()">✖ <span data-i18n="admin.clear">Clear Form</span></button>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="eyebrow" data-i18n="admin.listh">All Sin Entries</div>
+        <div style="overflow-x:auto;">
+          <table class="admin-table" id="admin-table"></table>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="eyebrow">📜 Issued Certificates</div>
+        <p class="small-note">Every judgment ever rendered is kept on record here. Admins can inspect or re-download any certificate that has been issued to a soul.</p>
+        <div style="overflow-x:auto;">
+          <table class="admin-table" id="admin-cert-table"></table>
+        </div>
+        <div id="admin-cert-preview-wrap" class="hidden" style="margin-top:16px;">
+          <div class="eyebrow">Certificate Preview</div>
+          <canvas id="admin-cert-canvas" width="900" height="620" class="cert-canvas-el"></canvas>
+          <div style="margin-top:10px;">
+            <button class="btn btn-gold btn-sm" onclick="downloadAdminCertificate()">⬇️ Download This Certificate</button>
+            <button class="btn-ghost btn btn-sm" onclick="closeAdminCertPreview()">✖ Close Preview</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="eyebrow" data-i18n="admin.dangerh">Danger Zone</div>
+        <button class="btn btn-sm" onclick="resetToDefaults()">♻️ <span data-i18n="admin.resetdefault">Reset to Default 28 Narakas</span></button>
+        <button class="btn btn-sm" onclick="clearJudgmentLog()">🗑️ <span data-i18n="admin.clearlog">Clear Judgment Log</span></button>
+      </div>
+
+      <div class="panel">
+        <div class="eyebrow">🎬 Add / Edit Mythology Movie or Series</div>
+        <input type="hidden" id="edit-movie-id">
+        <label class="field-label">Title</label><input type="text" id="f-movie-title" placeholder="e.g. Ramayan (1987)">
+        <label class="field-label">Year</label><input type="text" id="f-movie-year" placeholder="e.g. 1987">
+        <label class="field-label">Type</label>
+        <select id="f-movie-type"><option value="Movie">Movie</option><option value="TV Series">TV Series</option><option value="Web Series">Web Series</option></select>
+        <label class="field-label">About (keep to ~2 short lines)</label>
+        <textarea id="f-movie-desc" placeholder="A brief, spoiler-light description..." style="min-height:60px;"></textarea>
+        <label class="field-label">Poster Icon (emoji, shown if no photo)</label><input type="text" id="f-movie-icon" placeholder="🎬" maxlength="4">
+        <label class="field-label">Poster Photo (optional)</label>
+        <div class="movie-upload-row">
+          <input type="file" id="f-movie-file" accept="image/*" onchange="handleMovieImageUpload(event)">
+          <input type="text" id="f-movie-img" placeholder="...or paste an image URL" style="flex:1; min-width:180px;">
+          <img id="movie-thumb-preview" class="movie-thumb-preview hidden">
+        </div>
+        <div style="margin-top:10px;">
+          <button class="btn btn-gold btn-sm" onclick="saveMovieEntry()">💾 Save Movie</button>
+          <button class="btn-ghost btn btn-sm" onclick="clearMovieForm()">✖ Clear Form</button>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="eyebrow">🎬 All Movies & Series</div>
+        <div style="overflow-x:auto;">
+          <table class="admin-table" id="admin-movie-table"></table>
+        </div>
+        <button class="btn btn-sm" style="margin-top:10px;" onclick="resetMoviesToDefaults()">♻️ Reset Movie Library to Defaults</button>
+      </div>
+
+      <div style="text-align:center;">
+        <button class="btn-ghost btn" onclick="adminLogout()">🚪 <span data-i18n="admin.logout">Log Out</span></button>
+      </div>
+    </div>
+    <div style="text-align:center; margin-top:10px;"><button class="btn" onclick="go('home-screen')" data-i18n="common.backhall">↩ Back to Hall</button></div>
+  </div>
+</div>
+
+<!-- ============ ACHIEVEMENTS ============ -->
+<div id="achievements-screen" class="screen hidden">
+  <div class="container">
+    <h1 class="font-display" style="text-align:center; color:var(--gold);">🏆 Titles of the Judged</h1>
+    <p style="text-align:center; color:#c9b8a0; font-style:italic;">Every confession leaves a mark. These are yours.</p>
+    <div class="ach-grid" id="ach-grid"></div>
+    <div style="text-align:center; margin-top:16px;"><button class="btn" onclick="go('home-screen')">↩ Back to Hall</button></div>
+  </div>
+</div>
+
+<!-- ============ LEADERBOARD ============ -->
+<div id="leaderboard-screen" class="screen hidden">
+  <div class="container">
+    <h1 class="font-display" style="text-align:center; color:var(--gold);">📊 The Ledger of All Souls</h1>
+    <p style="text-align:center; color:#c9b8a0; font-style:italic;">Which fate has claimed the most souls so far?</p>
+    <canvas id="leaderboard-canvas" width="900" height="420"></canvas>
+    <div style="text-align:center; margin-top:10px;"><button class="btn" onclick="go('home-screen')">↩ Back to Hall</button></div>
+  </div>
+</div>
+
+<!-- ============ MOVIES & SERIES ============ -->
+<div id="movies-screen" class="screen hidden">
+  <div class="container">
+    <h1 class="font-display" style="text-align:center; color:var(--gold);">🎬 Indian Mythology On Screen</h1>
+    <p style="text-align:center; color:#c9b8a0; font-style:italic;">Films and series that bring the epics, the gods, and the folklore to life.</p>
+    <div class="movie-grid" id="movie-grid"></div>
+    <div style="text-align:center; margin-top:18px;"><button class="btn" onclick="go('home-screen')">↩ Back to Hall</button></div>
+  </div>
+</div>
+
+<script>
+/* ==========================================================================
+   YAMA DHARMA TERMINAL — application script
+   Sections: i18n, data, storage, navigation, entry flow, weighing animation,
+   certificate rendering, info pages, admin CRUD, dashboard stats
+   ========================================================================== */
+
+/* ---------------------------- I18N STRINGS ---------------------------- */
+const STR = {
+  en:{ "nav.home":"Hall","nav.confess":"Confess","nav.about":"About","nav.yugas":"Yugas","nav.notes":"Notes","nav.admin":"Admin",
+    "home.title":"The Judgment Hall","home.begin":"Begin Confession","home.aboutbtn":"About the Garuda Purana","home.yugasbtn":"The Four Yugas",
+    "home.notesbtn":"Educational Notes","home.footer":"28 Narakas · 3 Languages · Offline-Capable",
+    "entry.title":"Confess Before Chitragupta's Ledger","entry.name":"Name of the Soul","entry.age":"Age at Judgment","entry.confession":"Confession",
+    "entry.autoweigh":"Auto-Weigh by Karma","entry.voice":"Whisper Confession","entry.selectlang":"Language","entry.selectsin":"Select the Sin Committed",
+    "entry.pronounce":"PRONOUNCE JUDGMENT","common.back":"Back to Hall","common.backhall":"↩ Back to Hall",
+    "weigh.title":"The Scale of Dharma Turns...","final.eyebrow":"The Verdict of Yamaraja","final.download":"Download Certificate","final.print":"Print","final.return":"Return to Source",
+    "about.h1":"About the Garuda Purana","about.structh":"Structure of the Text","yugas.h1":"The Four Yugas","yugas.intro":"Hindu cosmology describes time as cyclical, unfolding across four great ages (Yugas) that together form one Mahayuga. Each age is said to see a gradual decline in dharma (righteousness), from an age of near-perfect virtue to one of moral struggle.",
+    "notes.h1":"Educational Notes","admin.h1":"Chitragupta's Admin Ledger","admin.pw":"Admin Passcode","admin.login":"Unlock Ledger","admin.hint":"Default demo passcode: yama108",
+    "admin.addh":"Add / Edit Sin Entry","admin.save":"Save Entry","admin.clear":"Clear Form","admin.listh":"All Sin Entries","admin.dangerh":"Danger Zone",
+    "admin.resetdefault":"Reset to Default 28 Narakas","admin.clearlog":"Clear Judgment Log","admin.logout":"Log Out",
+    "about.journeyh":"The Soul's Journey Through Yamaloka","about.journeyp":"Upon death, it is said the soul (jiva) leaves the body and is led by two fearsome messengers, the Yamadutas, on a long journey southward to Yamaloka, the realm of Yamaraja. The road is described as harsh and unlit, stretching across 86,000 yojanas, where the soul relives the weight of its own choices before ever reaching the hall of judgment.",
+    "about.chitrah":"Chitragupta, the Celestial Scribe","about.chitrap":"Seated beside Yamaraja is Chitragupta, keeper of the cosmic ledger, said to record every act, word, and intention of every living being across a lifetime. When the soul arrives, this ledger is read aloud — nothing omitted, nothing exaggerated — and it is against this record, not mere accusation, that judgment is passed.",
+    "about.vaitaranih":"The River Vaitarani","about.vaitaranip":"Between the world of the living and the halls of judgment flows the Vaitarani, a river described as thick with blood, bone, and grief — impassable to the guilty, who are pulled under by their own unresolved deeds, and crossable by the righteous, who are said to hold fast to the tail of a ritually gifted cow as they wade through.",
+    "about.pretah":"Preta: The Waiting Soul","about.pretap":"For a period traditionally described as twelve to thirteen days after death, the soul is said to linger as a preta, a formless, hungry, in-between being, dependent on the living performing shraddha rites (ritual offerings of food, water, and remembrance) to build it a symbolic new body strong enough to complete its journey. It is this belief that gives the Garuda Purana its central role in Hindu funeral tradition even today.",
+    "about.punarh":"Punarjanma: The Wheel Turns Again","about.punarp":"Punishment in the Narakas is described as neither eternal nor final. Once the weight of a particular sin has been \"worked off,\" the text holds that the soul is released for punarjanma — rebirth — into a new body and circumstance shaped by whatever karma remains outstanding. Even hell, in this framework, is a corrective passage rather than a permanent sentence.",
+    "yugas.tableh":"Comparative Table","yugas.col.yuga":"Yuga","yugas.col.dharma":"Dharma (of 4)","yugas.col.duration":"Duration (human years)","yugas.col.trait":"Defining Trait",
+    "yugas.trait.satya":"Truth & wisdom","yugas.trait.treta":"Duty & sacrifice","yugas.trait.dvapara":"Balance & doubt","yugas.trait.kali":"Conflict & decline",
+    "yugas.tablenote":"Together the four Yugas total 4,320,000 years — one Mahayuga. 1,000 Mahayugas make one Kalpa, described as a single day in the life of Brahma.",
+    "yugas.kalih":"We Are Living in Kali Yuga","yugas.kalip":"Tradition holds that Kali Yuga began roughly 5,000 years ago, at the moment of Krishna's departure from the earthly realm, and that we remain near its very beginning — with many thousands of years still to unfold. It is described as an age where truth erodes quietly, where shortcuts are mistaken for wisdom, and where the line between virtue and self-interest blurs with each generation.",
+    "yugas.kalkih":"The Promise of Kalki","yugas.kalkip":"Several Puranas, including the Garuda Purana's broader tradition, foretell that at the darkest close of Kali Yuga, Vishnu will descend as Kalki, a warrior riding a white horse, to end corruption and restore dharma — after which the cycle begins again with a new Satya Yuga. The wheel of time, in this view, never truly ends; it only turns." },
+  hi:{ "nav.home":"सभा","nav.confess":"स्वीकारोक्ति","nav.about":"परिचय","nav.yugas":"युग","nav.notes":"टिप्पणियाँ","nav.admin":"प्रशासन",
+    "home.title":"न्याय सभा","home.begin":"स्वीकारोक्ति आरंभ करें","home.aboutbtn":"गरुड़ पुराण के बारे में","home.yugasbtn":"चार युग",
+    "home.notesbtn":"शैक्षिक टिप्पणियाँ","home.footer":"२८ नरक · ३ भाषाएँ · ऑफ़लाइन उपलब्ध",
+    "entry.title":"चित्रगुप्त के लेखे के समक्ष स्वीकारोक्ति","entry.name":"आत्मा का नाम","entry.age":"न्याय के समय आयु","entry.confession":"स्वीकारोक्ति",
+    "entry.autoweigh":"कर्म अनुसार स्वतः तौलें","entry.voice":"मुख से स्वीकारोक्ति","entry.selectlang":"भाषा","entry.selectsin":"किया गया पाप चुनें",
+    "entry.pronounce":"निर्णय सुनाएं","common.back":"सभा में लौटें","common.backhall":"↩ सभा में लौटें",
+    "weigh.title":"धर्म का तराजू घूम रहा है...","final.eyebrow":"यमराज का निर्णय","final.download":"प्रमाणपत्र डाउनलोड करें","final.print":"प्रिंट करें","final.return":"स्रोत पर लौटें",
+    "about.h1":"गरुड़ पुराण के बारे में","about.structh":"ग्रंथ की संरचना","yugas.h1":"चार युग","yugas.intro":"हिन्दू ब्रह्मांड विज्ञान समय को चक्रीय मानता है, जो चार महान युगों में विभाजित है जो मिलकर एक महायुग बनाते हैं। प्रत्येक युग में धर्म में क्रमिक ह्रास माना जाता है।",
+    "notes.h1":"शैक्षिक टिप्पणियाँ","admin.h1":"चित्रगुप्त की प्रशासनिक बही","admin.pw":"प्रवेश कोड","admin.login":"बही अनलॉक करें","admin.hint":"डिफ़ॉल्ट डेमो कोड: yama108",
+    "admin.addh":"पाप प्रविष्टि जोड़ें / संपादित करें","admin.save":"सहेजें","admin.clear":"फ़ॉर्म साफ़ करें","admin.listh":"सभी पाप प्रविष्टियाँ","admin.dangerh":"खतरे का क्षेत्र",
+    "admin.resetdefault":"डिफ़ॉल्ट २८ नरकों में रीसेट करें","admin.clearlog":"निर्णय लॉग साफ़ करें","admin.logout":"लॉग आउट",
+    "about.journeyh":"यमलोक की ओर आत्मा की यात्रा","about.journeyp":"मृत्यु के पश्चात कहा जाता है कि आत्मा (जीव) शरीर छोड़कर दो भयंकर दूतों, यमदूतों, द्वारा दक्षिण दिशा में यमलोक की ओर एक लंबी यात्रा पर ले जाई जाती है। यह मार्ग ८६,००० योजन लंबा, कठोर और अंधकारमय बताया गया है, जहाँ आत्मा न्याय सभा पहुँचने से पहले अपने ही कर्मों का भार पुनः अनुभव करती है।",
+    "about.chitrah":"चित्रगुप्त, दिव्य लेखाकार","about.chitrap":"यमराज के समीप विराजमान चित्रगुप्त ब्रह्मांडीय बही के रक्षक हैं, जो प्रत्येक जीव के जीवनभर के हर कर्म, वचन और भाव को अंकित करते हैं। आत्मा के आगमन पर यह बही पढ़ी जाती है — बिना किसी लोप या अतिशयोक्ति के — और इसी अभिलेख के आधार पर न्याय होता है।",
+    "about.vaitaranih":"वैतरणी नदी","about.vaitaranip":"जीवित संसार और न्याय सभा के बीच वैतरणी नदी बहती है, जिसे रक्त, अस्थि और शोक से भरी बताया गया है — दोषियों के लिए यह अगम्य है, जो अपने ही अधूरे कर्मों द्वारा डुबो दिए जाते हैं, जबकि धर्मात्मा दान की गई गाय की पूँछ थामकर इसे पार करते हैं।",
+    "about.pretah":"प्रेत: प्रतीक्षारत आत्मा","about.pretap":"मृत्यु के पश्चात परंपरागत रूप से बारह से तेरह दिनों तक आत्मा को प्रेत — एक निराकार, भूखी, मध्यवर्ती अवस्था — में रहना बताया जाता है, जो जीवितों द्वारा किए गए श्राद्ध कर्मों (अन्न, जल और स्मरण के अनुष्ठानिक अर्पण) पर निर्भर होकर आगे की यात्रा हेतु प्रतीकात्मक नया शरीर प्राप्त करती है। यही मान्यता आज भी गरुड़ पुराण को हिन्दू अंत्येष्टि परंपरा में केंद्रीय स्थान देती है।",
+    "about.punarh":"पुनर्जन्म: चक्र पुनः घूमता है","about.punarp":"नरकों में दंड को न तो शाश्वत और न ही अंतिम बताया गया है। किसी विशेष पाप का भार \"चुक जाने\" पर, ग्रंथ के अनुसार आत्मा को पुनर्जन्म हेतु मुक्त कर दिया जाता है — शेष कर्मों के अनुरूप नए शरीर व परिस्थितियों में। इस दृष्टि से नरक भी एक सुधारात्मक चरण है, स्थायी सज़ा नहीं।",
+    "yugas.tableh":"तुलनात्मक तालिका","yugas.col.yuga":"युग","yugas.col.dharma":"धर्म (४ में से)","yugas.col.duration":"अवधि (मानव वर्ष)","yugas.col.trait":"प्रमुख लक्षण",
+    "yugas.trait.satya":"सत्य एवं ज्ञान","yugas.trait.treta":"कर्तव्य एवं त्याग","yugas.trait.dvapara":"संतुलन एवं संशय","yugas.trait.kali":"संघर्ष एवं पतन",
+    "yugas.tablenote":"चारों युग मिलकर ४३,२०,००० वर्ष — एक महायुग — बनाते हैं। १,००० महायुग मिलकर एक कल्प बनाते हैं, जिसे ब्रह्मा के एक दिन के समान बताया गया है।",
+    "yugas.kalih":"हम कलियुग में जी रहे हैं","yugas.kalip":"परंपरा के अनुसार कलियुग लगभग ५,००० वर्ष पूर्व, श्रीकृष्ण के पृथ्वी से प्रस्थान के समय आरंभ हुआ, और हम अभी भी इसके आरंभिक चरण में हैं — आगे हज़ारों वर्ष शेष हैं। इसे एक ऐसा युग बताया गया है जहाँ सत्य धीरे-धीरे क्षीण होता है और शॉर्टकट को बुद्धिमत्ता समझ लिया जाता है।",
+    "yugas.kalkih":"कल्कि का वचन","yugas.kalkip":"कई पुराणों की भाँति गरुड़ पुराण की परंपरा भी बताती है कि कलियुग के सबसे अंधकारमय क्षण में विष्णु श्वेत अश्व पर कल्कि रूप में अवतरित होंगे, भ्रष्टाचार का अंत कर धर्म की पुनर्स्थापना करेंगे — जिसके पश्चात नए सत्ययुग के साथ चक्र पुनः आरंभ होगा।" },
+  kn:{ "nav.home":"ಸಭೆ","nav.confess":"ಒಪ್ಪಿಗೆ","nav.about":"ಪರಿಚಯ","nav.yugas":"ಯುಗಗಳು","nav.notes":"ಟಿಪ್ಪಣಿಗಳು","nav.admin":"ನಿರ್ವಹಣೆ",
+    "home.title":"ನ್ಯಾಯ ಸಭೆ","home.begin":"ಒಪ್ಪಿಗೆ ಪ್ರಾರಂಭಿಸಿ","home.aboutbtn":"ಗರುಡ ಪುರಾಣದ ಬಗ್ಗೆ","home.yugasbtn":"ನಾಲ್ಕು ಯುಗಗಳು",
+    "home.notesbtn":"ಶೈಕ್ಷಣಿಕ ಟಿಪ್ಪಣಿಗಳು","home.footer":"೨೮ ನರಕಗಳು · ೩ ಭಾಷೆಗಳು · ಆಫ್‌ಲೈನ್ ಲಭ್ಯ",
+    "entry.title":"ಚಿತ್ರಗುಪ್ತನ ಲೆಕ್ಕದ ಮುಂದೆ ಒಪ್ಪಿಗೆ","entry.name":"ಆತ್ಮದ ಹೆಸರು","entry.age":"ತೀರ್ಪಿನ ಸಮಯದ ವಯಸ್ಸು","entry.confession":"ಒಪ್ಪಿಗೆ",
+    "entry.autoweigh":"ಕರ್ಮದಿಂದ ಸ್ವಯಂ ತೂಗಿಸಿ","entry.voice":"ಧ್ವನಿ ಒಪ್ಪಿಗೆ","entry.selectlang":"ಭಾಷೆ","entry.selectsin":"ಮಾಡಿದ ಪಾಪವನ್ನು ಆರಿಸಿ",
+    "entry.pronounce":"ತೀರ್ಪು ಪ್ರಕಟಿಸಿ","common.back":"ಸಭೆಗೆ ಹಿಂತಿರುಗಿ","common.backhall":"↩ ಸಭೆಗೆ ಹಿಂತಿರುಗಿ",
+    "weigh.title":"ಧರ್ಮದ ತಕ್ಕಡಿ ತಿರುಗುತ್ತಿದೆ...","final.eyebrow":"ಯಮರಾಜನ ತೀರ್ಪು","final.download":"ಪ್ರಮಾಣಪತ್ರ ಡೌನ್‌ಲೋಡ್ ಮಾಡಿ","final.print":"ಮುದ್ರಿಸಿ","final.return":"ಮೂಲಕ್ಕೆ ಹಿಂತಿರುಗಿ",
+    "about.h1":"ಗರುಡ ಪುರಾಣದ ಬಗ್ಗೆ","about.structh":"ಗ್ರಂಥದ ರಚನೆ","yugas.h1":"ನಾಲ್ಕು ಯುಗಗಳು","yugas.intro":"ಹಿಂದೂ ವಿಶ್ವವಿಜ್ಞಾನವು ಕಾಲವನ್ನು ಚಕ್ರೀಯವಾಗಿ ವಿವರಿಸುತ್ತದೆ, ನಾಲ್ಕು ಮಹಾಯುಗಗಳಾಗಿ ವಿಂಗಡಿಸಲಾಗಿದೆ.",
+    "notes.h1":"ಶೈಕ್ಷಣಿಕ ಟಿಪ್ಪಣಿಗಳು","admin.h1":"ಚಿತ್ರಗುಪ್ತನ ನಿರ್ವಹಣಾ ಲೆಕ್ಕ","admin.pw":"ಪ್ರವೇಶ ಕೋಡ್","admin.login":"ಲೆಕ್ಕ ಅನ್‌ಲಾಕ್ ಮಾಡಿ","admin.hint":"ಡೀಫಾಲ್ಟ್ ಡೆಮೊ ಕೋಡ್: yama108",
+    "admin.addh":"ಪಾಪ ನಮೂದನ್ನು ಸೇರಿಸಿ / ಸಂಪಾದಿಸಿ","admin.save":"ಉಳಿಸಿ","admin.clear":"ಫಾರ್ಮ್ ತೆರವುಗೊಳಿಸಿ","admin.listh":"ಎಲ್ಲಾ ಪಾಪ ನಮೂದುಗಳು","admin.dangerh":"ಅಪಾಯದ ವಲಯ",
+    "admin.resetdefault":"ಡೀಫಾಲ್ಟ್ ೨೮ ನರಕಗಳಿಗೆ ಮರುಹೊಂದಿಸಿ","admin.clearlog":"ತೀರ್ಪು ದಾಖಲೆ ತೆರವುಗೊಳಿಸಿ","admin.logout":"ಲಾಗ್ ಔಟ್",
+    "about.journeyh":"ಯಮಲೋಕದ ಕಡೆಗೆ ಆತ್ಮದ ಪಯಣ","about.journeyp":"ಮರಣಾನಂತರ ಆತ್ಮ (ಜೀವ) ದೇಹ ತೊರೆದು, ಯಮದೂತರೆಂಬ ಇಬ್ಬರು ಭಯಾನಕ ದೂತರ ಜೊತೆ ದಕ್ಷಿಣದ ಕಡೆಗೆ ಯಮಲೋಕದತ್ತ ಸುದೀರ್ಘ ಪಯಣ ಕೈಗೊಳ್ಳುತ್ತದೆ ಎಂದು ಹೇಳಲಾಗಿದೆ. ಈ ಮಾರ್ಗ ೮೬,೦೦೦ ಯೋಜನ ಉದ್ದವಿದ್ದು, ಕಠಿಣ ಮತ್ತು ಕತ್ತಲಿನಿಂದ ಕೂಡಿದೆ ಎಂದು ವಿವರಿಸಲಾಗಿದೆ.",
+    "about.chitrah":"ಚಿತ್ರಗುಪ್ತ, ದೈವಿಕ ಲೇಖಕ","about.chitrap":"ಯಮರಾಜನ ಪಕ್ಕದಲ್ಲಿ ಕುಳಿತ ಚಿತ್ರಗುಪ್ತನು ಬ್ರಹ್ಮಾಂಡದ ಲೆಕ್ಕದ ರಕ್ಷಕ, ಪ್ರತಿಯೊಬ್ಬ ಜೀವಿಯ ಜೀವಮಾನದ ಪ್ರತಿಯೊಂದು ಕಾರ್ಯ, ಮಾತು ಮತ್ತು ಉದ್ದೇಶವನ್ನು ದಾಖಲಿಸುತ್ತಾನೆ ಎಂದು ಹೇಳಲಾಗಿದೆ. ಆತ್ಮ ಬಂದಾಗ ಈ ಲೆಕ್ಕವನ್ನು ಓದಲಾಗುತ್ತದೆ — ಏನನ್ನೂ ಬಿಡದೆ, ಏನನ್ನೂ ಉತ್ಪ್ರೇಕ್ಷಿಸದೆ.",
+    "about.vaitaranih":"ವೈತರಣಿ ನದಿ","about.vaitaranip":"ಜೀವಂತ ಜಗತ್ತು ಮತ್ತು ನ್ಯಾಯ ಸಭೆಯ ನಡುವೆ ವೈತರಣಿ ನದಿ ಹರಿಯುತ್ತದೆ, ಇದು ರಕ್ತ, ಎಲುಬು ಮತ್ತು ದುಃಖದಿಂದ ದಟ್ಟವಾಗಿದೆ ಎಂದು ವಿವರಿಸಲಾಗಿದೆ — ತಪ್ಪಿತಸ್ಥರಿಗೆ ದಾಟಲಾಗದು, ಸಜ್ಜನರು ದಾನವಾಗಿ ನೀಡಿದ ಹಸುವಿನ ಬಾಲ ಹಿಡಿದು ದಾಟುತ್ತಾರೆ ಎಂದು ಹೇಳಲಾಗಿದೆ.",
+    "about.pretah":"ಪ್ರೇತ: ಕಾಯುತ್ತಿರುವ ಆತ್ಮ","about.pretap":"ಮರಣಾನಂತರ ಸಾಂಪ್ರದಾಯಿಕವಾಗಿ ಹನ್ನೆರಡರಿಂದ ಹದಿಮೂರು ದಿನಗಳವರೆಗೆ ಆತ್ಮವು ಪ್ರೇತವಾಗಿ, ಆಕಾರವಿಲ್ಲದ, ಹಸಿದ ಮಧ್ಯಂತರ ಸ್ಥಿತಿಯಲ್ಲಿ ಇರುತ್ತದೆ ಎಂದು ಹೇಳಲಾಗಿದೆ, ಜೀವಂತರು ನಡೆಸುವ ಶ್ರಾದ್ಧ ಕರ್ಮಗಳ ಮೇಲೆ ಅವಲಂಬಿತವಾಗಿ ಸಂಕೇತಾತ್ಮಕ ಹೊಸ ದೇಹ ಪಡೆಯುತ್ತದೆ.",
+    "about.punarh":"ಪುನರ್ಜನ್ಮ: ಚಕ್ರ ಮತ್ತೆ ತಿರುಗುತ್ತದೆ","about.punarp":"ನರಕಗಳಲ್ಲಿನ ಶಿಕ್ಷೆಯನ್ನು ಶಾಶ್ವತವಲ್ಲ ಅಥವಾ ಅಂತಿಮವಲ್ಲ ಎಂದು ವಿವರಿಸಲಾಗಿದೆ. ಒಂದು ನಿರ್ದಿಷ್ಟ ಪಾಪದ ಭಾರ \"ತೀರಿದ\" ನಂತರ, ಆತ್ಮವನ್ನು ಪುನರ್ಜನ್ಮಕ್ಕಾಗಿ ಬಿಡುಗಡೆ ಮಾಡಲಾಗುತ್ತದೆ ಎಂದು ಗ್ರಂಥ ಹೇಳುತ್ತದೆ.",
+    "yugas.tableh":"ತುಲನಾತ್ಮಕ ಕೋಷ್ಟಕ","yugas.col.yuga":"ಯುಗ","yugas.col.dharma":"ಧರ್ಮ (೪ ರಲ್ಲಿ)","yugas.col.duration":"ಅವಧಿ (ಮಾನವ ವರ್ಷಗಳು)","yugas.col.trait":"ಪ್ರಮುಖ ಲಕ್ಷಣ",
+    "yugas.trait.satya":"ಸತ್ಯ ಮತ್ತು ಜ್ಞಾನ","yugas.trait.treta":"ಕರ್ತವ್ಯ ಮತ್ತು ತ್ಯಾಗ","yugas.trait.dvapara":"ಸಮತೋಲನ ಮತ್ತು ಸಂದೇಹ","yugas.trait.kali":"ಸಂಘರ್ಷ ಮತ್ತು ಅವನತಿ",
+    "yugas.tablenote":"ನಾಲ್ಕು ಯುಗಗಳು ಒಟ್ಟಾಗಿ ೪೩,೨೦,೦೦೦ ವರ್ಷಗಳು — ಒಂದು ಮಹಾಯುಗ — ಆಗುತ್ತವೆ. ೧,೦೦೦ ಮಹಾಯುಗಗಳು ಒಂದು ಕಲ್ಪವಾಗುತ್ತವೆ, ಇದನ್ನು ಬ್ರಹ್ಮನ ಒಂದು ದಿನಕ್ಕೆ ಹೋಲಿಸಲಾಗಿದೆ.",
+    "yugas.kalih":"ನಾವು ಕಲಿಯುಗದಲ್ಲಿ ಬದುಕುತ್ತಿದ್ದೇವೆ","yugas.kalip":"ಸಂಪ್ರದಾಯದ ಪ್ರಕಾರ ಕಲಿಯುಗ ಸುಮಾರು ೫,೦೦೦ ವರ್ಷಗಳ ಹಿಂದೆ, ಶ್ರೀಕೃಷ್ಣನ ಭೂಲೋಕದಿಂದ ನಿರ್ಗಮನದ ಸಮಯದಲ್ಲಿ ಆರಂಭವಾಯಿತು, ಮತ್ತು ನಾವು ಇನ್ನೂ ಅದರ ಆರಂಭಿಕ ಹಂತದಲ್ಲಿದ್ದೇವೆ.",
+    "yugas.kalkih":"ಕಲ್ಕಿಯ ವಾಗ್ದಾನ","yugas.kalkip":"ಗರುಡ ಪುರಾಣದ ಸಂಪ್ರದಾಯ ಸೇರಿದಂತೆ ಹಲವು ಪುರಾಣಗಳು, ಕಲಿಯುಗದ ಅತ್ಯಂತ ಕತ್ತಲೆಯ ಘಟ್ಟದಲ್ಲಿ ವಿಷ್ಣುವು ಬಿಳಿ ಕುದುರೆಯ ಮೇಲೆ ಕಲ್ಕಿಯಾಗಿ ಅವತರಿಸಿ, ಭ್ರಷ್ಟಾಚಾರವನ್ನು ಕೊನೆಗೊಳಿಸಿ ಧರ್ಮವನ್ನು ಪುನಃ ಸ್ಥಾಪಿಸುತ್ತಾನೆ ಎಂದು ಭವಿಷ್ಯ ನುಡಿಯುತ್ತವೆ." }
+};
+let currentLang = 'en';
+
+/* ---------------------------- CORE DATA (28 Narakas) ---------------------------- */
+const DEFAULT_DB = [
+  { id:1, sin:{en:"Murder 🔪",hi:"हत्या 🔪",kn:"ಕೊಲೆ 🔪"}, vName:{en:"⛓️‍💥 TAMISRA",hi:"⛓️‍💥 तामिस्र",kn:"⛓️‍💥 ತಾಮಿಸ್ರ"}, vDesc:{en:"Bound in total darkness and beaten by Yama's servants. 🌑",hi:"अंधकार में जकड़कर पिटाई। 🌑",kn:"ಕತ್ತಲೆಯಲ್ಲಿ ಬಂಧನ. 🌑"}, modern:"Homicide is prosecuted as murder or manslaughter in nearly every legal system, typically carrying the most severe penalties available, including life imprisonment or, in some jurisdictions, capital punishment." },
+  { id:2, sin:{en:"Deceiving a Spouse 💔",hi:"धोखा 💔",kn:"ದ್ರೋಹ 💔"}, vName:{en:"🌑 ANDHATAMISRA",hi:"🌑 अंधतामिस्र",kn:"🌑 ಅಂಧತಾಮಿಸ್ರ"}, vDesc:{en:"Stripped of senses in a black pit. 🕳️",hi:"अथाह काले गड्ढे में यातना। 🕳️",kn:"ಕತ್ತಲೆಯ ಕೂಪದಲ್ಲಿ ಶಿಕ್ಷೆ. 🕳️"}, modern:"Depending on jurisdiction, marital fraud or bigamy can lead to civil penalties such as annulment, and in some places criminal charges for bigamy or fraud." },
+  { id:3, sin:{en:"Torturing Innocents ⛓️",hi:"हिंसा ⛓️",kn:"ಹಿಂಸೆ ⛓️"}, vName:{en:"🐍 RAURAVA",hi:"🐍 रौरव",kn:"🐍 ರೌರವ"}, vDesc:{en:"Trapped with venomous serpents. 🐍",hi:"जहरीले सांपों द्वारा यातना। 🐍",kn:"ವಿಷಪೂರಿತ ಸರ್ಪಗಳ ಹಾವಳಿ. 🐍"}, modern:"Assault, torture, or aggravated battery are serious criminal offenses in most countries, often carrying lengthy prison sentences and civil liability for damages." },
+  { id:4, sin:{en:"Extreme Cruelty 👹",hi:"क्रूरता 👹",kn:"ಕ್ರೂರತೆ 👹"}, vName:{en:"🐺 MAHARAURAVA",hi:"🐺 महारौरव",kn:"🐺 ಮಹಾರೌರವ"}, vDesc:{en:"Man-eating beasts tear away flesh. 🥩",hi:"नरभक्षी जीव मांस नोचते हैं। 🥩",kn:"ಮೃಗಗಳು ಮಾಂಸವನ್ನು ತಿನ್ನುತ್ತವೆ. 🥩"}, modern:"Domestic cruelty and abuse statutes in many countries impose criminal penalties, protective orders, and mandated counseling on offenders." },
+  { id:5, sin:{en:"Animal Slaughter 🐂",hi:"पशु हत्या 🐂",kn:"ಪ್ರಾಣಿ ಹತ್ಯೆ 🐂"}, vName:{en:"🔥 KUMBHIPAKA",hi:"🔥 कुंभीपाक",kn:"🔥 ಕುಂಭೀಪಾಕ"}, vDesc:{en:"Submerged in boiling oil. ♨️",hi:"खौलते तेल में भूना जाता है। ♨️",kn:"ಕುದಿಯುವ ಎಣ್ಣೆಯಲ್ಲಿ ಶಿಕ್ಷೆ. ♨️"}, modern:"Illegal poaching or animal cruelty laws impose fines and imprisonment in most countries, with stricter penalties for endangered species." },
+  { id:6, sin:{en:"Disrespecting Elders 👴",hi:"अनादर 👴",kn:"ಹಿರಿಯರ ನಿಂದನೆ 👴"}, vName:{en:"⚡ KALASUTRA",hi:"⚡ कालसूत्र",kn:"⚡ ಕಾಲಸೂತ್ರ"}, vDesc:{en:"Forced to run endlessly on red-hot copper ground. 🥉",hi:"दहकते तांबे पर दौड़ना। 🥉",kn:"ಕಾದ ತಾಮ್ರದ ಮೇಲೆ ಓಡುವಿಕೆ. 🥉"}, modern:"Elder abuse or neglect can trigger civil liability, mandatory reporting, and in serious cases criminal charges under adult-protective-services laws." },
+  { id:7, sin:{en:"Rejecting Dharma / Duty 🕉️",hi:"अधर्म 🕉️",kn:"ಧರ್ಮ ತ್ಯಾಗ 🕉️"}, vName:{en:"🗡️ ASIPATRAVANA",hi:"🗡️ असिपत्रवन",kn:"🗡️ ಅಸಿಪತ್ರವನ"}, vDesc:{en:"Wandering a forest of razor-sharp sword leaves. 🔪",hi:"धारदार पत्तियों से घाव। 🔪",kn:"ಹರಿತವಾದ ಎಲೆಗಳ ಶಿಕ್ಷೆ. 🔪"}, modern:"Breach of fiduciary or professional duty can result in civil suits, licensing revocation, or criminal negligence charges depending on severity." },
+  { id:8, sin:{en:"Tyranny / Abuse of Power 👑",hi:"तानाशाही 👑",kn:"ದಬ್ಬಾಳಿಕೆ 👑"}, vName:{en:"⚙️ SUKARAMUKHA",hi:"⚙️ सूकरमुख",kn:"⚙️ ಸೂಕರಮುಖ"}, vDesc:{en:"Mechanically crushed between grinding stones. ⚙️",hi:"मशीन में हड्डियां चकनाचूर। ⚙️",kn:"ಯಂತ್ರದಲ್ಲಿ ಮೂಳೆಗಳ ಪುಡಿ. ⚙️"}, modern:"Abuse of public office or authority is prosecuted as corruption or misconduct in office, often carrying disqualification from public service and imprisonment." },
+  { id:9, sin:{en:"Harming Insects Needlessly 🦂",hi:"कीड़ों को मारना 🦂",kn:"ಕೀಟ ಹಿಂಸೆ 🦂"}, vName:{en:"🦂 ANDHAKUPA",hi:"🦂 अंधकूप",kn:"🦂 ಅಂಧಕೂಪ"}, vDesc:{en:"Cast into a dark pit swarming with scorpions. 🦂",hi:"बिच्छू भरे कुएं में। 🦂",kn:"ಚೇಳುಗಳ ಬಾವಿ. 🦂"}, modern:"Reckless environmental harm, such as improper pesticide use, can draw regulatory fines under environmental protection statutes." },
+  { id:10, sin:{en:"Hoarding / Wasting Food 🍞",hi:"भोजन बर्बादी 🍞",kn:"ಆಹಾರದ ದುರುಪಯೋಗ 🍞"}, vName:{en:"🐛 KRIMIBHOJANA",hi:"🐛 क्रिमिभोजन",kn:"🐛 ಕ್ರಿಮಿಭೋಜನ"}, vDesc:{en:"The body is consumed by parasitic worms. 🐛",hi:"कीड़ों द्वारा शरीर को कुतरा जाना। 🐛",kn:"ಹುಳುಗಳಿಂದ ದೇಹ ಕೊರೆಯುವಿಕೆ. 🐛"}, modern:"Price gouging or illegal hoarding during shortages is regulated and penalized under consumer protection and emergency-supply laws in many countries." },
+  { id:11, sin:{en:"Robbery / Theft 💰",hi:"लूटपाट 💰",kn:"ದರೋಡೆ 💰"}, vName:{en:"🗜️ SANDAMSA",hi:"🗜️ संदंश",kn:"🗜️ ಸಂದಂಶ"}, vDesc:{en:"Flesh torn with red-hot iron tongs. 🗜️",hi:"गर्म चिमटों से मांस उखाड़ना। 🗜️",kn:"ಕೆಂಡದ ಇಕ್ಕಳದಿಂದ ಮಾಂಸದ ಶಿಕ್ಷೆ. 🗜️"}, modern:"Theft and robbery are criminal offenses nearly everywhere, with penalties scaling from fines to lengthy imprisonment based on value and use of force." },
+  { id:12, sin:{en:"Infidelity 💍",hi:"व्यभिचार 💍",kn:"ವ್ಯಭಿಚಾರ 💍"}, vName:{en:"🥵 TAPTASURMI",hi:"🥵 तप्तसूर्मी",kn:"🥵 ತಪ್ತಸೂರ್ಮಿ"}, vDesc:{en:"Forced to embrace a white-hot iron figure. 🥵",hi:"दहकती मूर्तियों को गले लगाना। 🥵",kn:"ಬಿಸಿಯಾದ ಪ್ರತಿಮೆ ಅಪ್ಪಿಕೊಳ್ಳುವಿಕೆ. 🥵"}, modern:"While adultery is rarely criminal today, it commonly carries civil consequences in divorce proceedings, such as affecting alimony or asset division." },
+  { id:13, sin:{en:"Corruption / Bribery 📑",hi:"भ्रष्ट आचरण 📑",kn:"ಭ್ರಷ್ಟ ನಡವಳಿಕೆ 📑"}, vName:{en:"🌵 VAJRAKANTAKA",hi:"🌵 वज्रकंटक",kn:"🌵 ವಜ್ರಕಂಟಕ"}, vDesc:{en:"Dragged across razor-sharp thorny ground. 🌵",hi:"नुकीले कांटों पर घसीटा जाना। 🌵",kn:"ಹರಿತವಾದ ಮುಳ್ಳಿನ ಶಿಕ್ಷೆ. 🌵"}, modern:"Bribery and corruption are criminal offenses under anti-corruption statutes worldwide, typically carrying fines, imprisonment, and career-ending disqualification." },
+  { id:14, sin:{en:"Bribing Officials 💸",hi:"रिश्वतखोरी 💸",kn:"ಲಂಚಕೋರತನ 💸"}, vName:{en:"🩸 VAITARANI",hi:"🩸 वैतरणी",kn:"🩸 ವೈತರಣಿ"}, vDesc:{en:"Forced to cross a river of boiling blood and filth. 🩸",hi:"खौलते रक्त की नदी में डूबना। 🩸",kn:"ಕುದಿಯುವ ರಕ್ತದ ನದಿ. 🩸"}, modern:"Offering bribes to public officials is a criminal act in most legal systems, often prosecuted alongside the official who accepts it." },
+  { id:15, sin:{en:"Hypocrisy 🎭",hi:"पाखंड 🎭",kn:"ಪಾಷಂಡತನ 🎭"}, vName:{en:"🤢 PUYODA",hi:"🤢 पूयोद",kn:"🤢 ಪೂಯೋದ"}, vDesc:{en:"Immersed in a swamp of foul waste. 🤢",hi:"मल-मूत्र के दलदल में दम घुटना। 🤢",kn:"ಕಸದ ರಾಶಿಯಲ್ಲಿ ಶಿಕ್ಷೆ. 🤢"}, modern:"Fraudulent misrepresentation, such as false advertising or fake charity solicitation, is regulated and penalized under consumer-fraud statutes." },
+  { id:16, sin:{en:"Sport Hunting 🏹",hi:"शिकार 🏹",kn:"ಬೇಟೆಯಾಡುವುದು 🏹"}, vName:{en:"🏹 PRANARODHA",hi:"🏹 प्राणरोध",kn:"🏹 ಪ್ರಾಣರೋಧ"}, vDesc:{en:"The body is pierced repeatedly with arrows. 🏹",hi:"असंख्य तीरों से शरीर छलनी। 🏹",kn:"ಬಾಣಗಳಿಂದ ದೇಹದ ಶಿಕ್ಷೆ. 🏹"}, modern:"Illegal hunting or poaching of protected species carries fines and imprisonment under wildlife protection laws in most countries." },
+  { id:17, sin:{en:"Exploiting Workers 🔨",hi:"शोषक 🔨",kn:"ಶೋಷಣೆ 🔨"}, vName:{en:"🔨 VISASANA",hi:"🔨 विशसन",kn:"🔨 ವಿಶಸನ"}, vDesc:{en:"Bones are broken with heavy hammers. 🔨",hi:"भारी हथौड़ों से हड्डियां तोड़ना। 🔨",kn:"ಸುತ್ತಿಗೆಯಿಂದ ಮೂಳೆಗಳ ಭಂಗ. 🔨"}, modern:"Labor exploitation, wage theft, and unsafe working conditions are regulated by labor law, with penalties including fines and business shutdowns." },
+  { id:18, sin:{en:"Betraying Trust 🤝",hi:"विश्वासघात 🤝",kn:"ನಂಬಿಕೆ ದ್ರೋಹ 🤝"}, vName:{en:"🧪 LALABHAKSHA",hi:"🧪 लालाभक्ष",kn:"🧪 ಲಾಲಾಭಕ್ಷ"}, vDesc:{en:"Forced to ingest toxic fluid. 🧪",hi:"जहरीला द्रव्य पीना। 🧪",kn:"ವಿಷಪೂರಿತ ದ್ರವ್ಯ ಸೇವನೆ. 🧪"}, modern:"Breach of contract or fiduciary betrayal can lead to civil lawsuits for damages and, in cases of fraud, criminal prosecution." },
+  { id:19, sin:{en:"Arson 🏠",hi:"आगजनी 🏠",kn:"ಬೆಂಕಿ ಹಚ್ಚುವುದು 🏠"}, vName:{en:"🐕 SARAMEYADANA",hi:"🐕 सारमेयदन",kn:"🐕 ಸಾರಮೇಯದನ"}, vDesc:{en:"Set upon by fierce, otherworldly hounds. 🐕",hi:"खूंखार कुत्तों द्वारा नोचना। 🐕",kn:"ಭೀಕರ ನಾಯಿಗಳ ಶಿಕ್ಷೆ. 🐕"}, modern:"Arson is a serious felony in virtually every jurisdiction, often carrying decades of imprisonment, especially where lives are endangered." },
+  { id:20, sin:{en:"False Witness / Perjury 🤥",hi:"झूठी गवाही 🤥",kn:"ಸುಳ್ಳು ಸಾಕ್ಷಿ 🤥"}, vName:{en:"🏔️ AVICHI",hi:"🏔️ अवीचि",kn:"🏔️ ಅವೀಚಿ"}, vDesc:{en:"Repeatedly cast down from great cliffs. 🏔️",hi:"पहाड़ों से गिरकर शरीर के टुकड़े। 🏔️",kn:"ಬಂಡೆಗಳ ಮೇಲಿಂದ ಎಸೆಯುವಿಕೆ. 🏔️"}, modern:"Perjury and lying under oath are criminal offenses that can result in fines, imprisonment, and the invalidation of legal proceedings." },
+  { id:21, sin:{en:"Selling Harmful Substances 💊",hi:"नशा बेचना 💊",kn:"ಮಾದಕ ಮಾರಾಟ 💊"}, vName:{en:"🧪 AYAHPANA",hi:"🧪 अयपान",kn:"🧪 ಅಯಪಾನ"}, vDesc:{en:"Molten metal is poured down the throat. 🧪",hi:"पिघला सीसा गले में उंडेला जाना। 🧪",kn:"ಕರಗಿದ ಸೀಸದ ಶಿಕ್ಷೆ. 🧪"}, modern:"Illegal drug trafficking and sale of controlled substances carry some of the harshest criminal penalties worldwide, including long imprisonment." },
+  { id:22, sin:{en:"Excessive Ego / Arrogance 😤",hi:"अहंकार 😤",kn:"ಪರಮ ಅಹಂಕಾರ 😤"}, vName:{en:"☣️ KSARAKARDAMA",hi:"☣️ क्षारकर्दम",kn:"☣️ ಕ್ಷಾರಕರ್ದಮ"}, vDesc:{en:"Hung upside-down in caustic mud. ☣️",hi:"तेजाब में उल्टा लटकना। ☣️",kn:"ಕುದಿಯುವ ಆಮ್ಲದಲ್ಲಿ ಶಿಕ್ಷೆ. ☣️"}, modern:"While arrogance itself isn't illegal, defamation or slander stemming from prideful conduct can result in civil liability for damages." },
+  { id:23, sin:{en:"Dark Rituals / Human Sacrifice 💀",hi:"नरबलि 💀",kn:"ನರಬಲಿ 💀"}, vName:{en:"💀 RAKSHOGANA",hi:"💀 रक्षोगण",kn:"💀 ರಕ್ಷೋಗಣ"}, vDesc:{en:"Subjected to torment by those once wronged. 💀",hi:"पीड़ितों द्वारा शरीर काटना। 💀",kn:"ಹತ್ಯೆಗೀಡಾದವರಿಂದ ಶಿಕ್ಷೆ. 💀"}, modern:"Ritual killing or human sacrifice is prosecuted as premeditated murder, one of the most severely punished crimes in any legal system." },
+  { id:24, sin:{en:"Ultimate Betrayal 🔱",hi:"विश्वासघात 🔱",kn:"ಪರಮ ದ್ರೋಹ 🔱"}, vName:{en:"🔱 SHULAPROTA",hi:"🔱 शूलप्रोत",kn:"🔱 ಶೂಲಪ್ರೋತ"}, vDesc:{en:"Impaled upon a great trident. 🔱",hi:"विशाल त्रिशूल पर चुभाना। 🔱",kn:"ತ್ರಿಶೂಲಕ್ಕೆ ಪೋಣಿಸುವ ಶಿಕ್ಷೆ. 🔱"}, modern:"Treason or betrayal of a nation's trust is among the most severely punished crimes under most countries' penal codes." },
+  { id:25, sin:{en:"Spreading Social Hatred 👹",hi:"समाज में जहर 👹",kn:"ಸಮಾಜದಲ್ಲಿ ದ್ವೇಷ 👹"}, vName:{en:"👹 DANDASUKA",hi:"👹 दण्डशुक",kn:"👹 ದಂಡಶುಕ"}, vDesc:{en:"Beset by venomous, serpentine creatures. 👹",hi:"भयानक जीव मांस खाना। 👹",kn:"ಮುಖದ ಮಾಂಸ ಭಕ್ಷಕ ಜೀವಿ. 👹"}, modern:"Incitement to hatred or violence is criminalized under hate-speech and public-order laws in many democratic countries." },
+  { id:26, sin:{en:"Kidnapping ⛓️",hi:"अपहरण ⛓️",kn:"ಅಪಹರಣ ⛓️"}, vName:{en:"⛓️ AVATA",hi:"⛓️ अवट",kn:"⛓️ ಅವಟ"}, vDesc:{en:"Trapped within a slowly crushing chamber. ⛓️",hi:"कुचलने वाली कोठरी। ⛓️",kn:"ಉಸಿರುಗಟ್ಟುವ ಕೋಣೆ. ⛓️"}, modern:"Kidnapping and unlawful confinement are serious felonies nearly everywhere, often carrying decades of imprisonment." },
+  { id:27, sin:{en:"Violating Hospitality 🦅",hi:"अतिथियों का अपमान 🦅",kn:"ಅತಿಥಿ ಅವಮಾನ 🦅"}, vName:{en:"🦅 PARYAVARTANA",hi:"🦅 पर्यावर्तन",kn:"🦅 ಪರ್ಯಾವರ್ತನ"}, vDesc:{en:"Flesh pecked by iron-beaked birds. 🦅",hi:"पक्षियों द्वारा मांस नोचना। 🦅",kn:"ಕಬ್ಬಿಣದ ಕೊಕ್ಕಿನ ಹಕ್ಕಿ. 🦅"}, modern:"Abusing a position of trust toward a guest, client, or dependent can trigger civil liability and, in cases of harm, criminal charges." },
+  { id:28, sin:{en:"Extreme Greed 🪡",hi:"अत्यधिक लालच 🪡",kn:"ಅತಿಯಾದ ದುರಾಶೆ 🪡"}, vName:{en:"🪡 SUCIMUKHA",hi:"🪡 सूचिमख",kn:"🪡 ಸೂಚಿಮುಖ"}, vDesc:{en:"The body is stitched with a thousand needles. 🪡",hi:"हजारों सुइयों से सिलना। 🪡",kn:"ಸಾವಿರಾರು ಸೂಜಿಗಳ ಶಿಕ್ಷೆ. 🪡"}, modern:"Large-scale financial fraud or embezzlement driven by greed is prosecuted under securities and fraud law, often with lengthy sentences." }
+];
+
+/* ---------------------------- STORAGE LAYER ---------------------------- */
+/* Wrapped so the app still works if localStorage is unavailable (e.g. in a
+   sandboxed preview). When opened as a normal file in a browser, or hosted,
+   full persistence via localStorage is used automatically. */
+const MemoryStore = {}; // fallback
+function storageAvailable(){
+  try{ const k="__yama_test__"; localStorage.setItem(k,"1"); localStorage.removeItem(k); return true; }catch(e){ return false; }
+}
+const HAS_LS = storageAvailable();
+function lsGet(key, fallback){
+  try{
+    if(HAS_LS){ const v = localStorage.getItem(key); return v===null ? fallback : JSON.parse(v); }
+    return (key in MemoryStore) ? MemoryStore[key] : fallback;
+  }catch(e){ return fallback; }
+}
+function lsSet(key, value){
+  try{
+    if(HAS_LS){ localStorage.setItem(key, JSON.stringify(value)); }
+    else{ MemoryStore[key] = value; }
+  }catch(e){ MemoryStore[key] = value; }
+}
+
+let database = lsGet('yama_sins_db', null) || DEFAULT_DB.slice();
+let judgmentLog = lsGet('yama_judgment_log', []);
+let isAdmin = false;
+let selectedSin = null;
+
+const DEFAULT_MOVIES = [
+  { id:1, title:'Ramayan (1987)', year:'1987', type:'TV Series', icon:'🏹', img:'',
+    desc:'The Doordarshan classic retelling of Prince Rama\'s exile, Sita\'s abduction, and the war against Ravana. One of the most-watched mythological series in Indian television history.' },
+  { id:2, title:'Mahabharat (1988)', year:'1988', type:'TV Series', icon:'⚔️', img:'',
+    desc:'B.R. Chopra\'s sweeping serial of the Kurukshetra rivalry between the Pandavas and Kauravas, famed for its scale and its telling of the Bhagavad Gita.' },
+  { id:3, title:'Baahubali: The Beginning', year:'2015', type:'Movie', icon:'👑', img:'',
+    desc:'A fictional kingdom epic steeped in Indian mythic imagery. Shivudu uncovers a hidden royal lineage and a legacy of betrayal.' },
+  { id:4, title:'Baahubali 2: The Conclusion', year:'2017', type:'Movie', icon:'🗡️', img:'',
+    desc:'The concluding chapter finally answers why Kattappa killed Baahubali, blending myth-scale battles with duty and dharma.' },
+  { id:5, title:'Tumbbad', year:'2018', type:'Movie', icon:'🫙', img:'',
+    desc:'A dark folk-horror tale built around Hastar, a discarded god of greed banished by his own mother. Myth meets human avarice.' },
+  { id:6, title:'Kantara', year:'2022', type:'Movie', icon:'🐗', img:'',
+    desc:'A Karnataka coastal village drama rooted in Bhuta Kola spirit-worship traditions, blending folklore, land conflict, and divine possession.' },
+  { id:7, title:'OMG – Oh My God!', year:'2012', type:'Movie', icon:'⚖️', img:'',
+    desc:'A shopkeeper sues God after an earthquake destroys his shop, sparking a courtroom comedy that questions faith and religious commercialism.' },
+  { id:8, title:'Brahmastra Part One: Shiva', year:'2022', type:'Movie', icon:'⚡', img:'',
+    desc:'Opening chapter of a planned trilogy imagining a hidden order guarding India\'s mythological astras in the present day.' },
+  { id:9, title:'Adipurush', year:'2023', type:'Movie', icon:'🏹', img:'',
+    desc:'A modern, VFX-driven retelling of the Ramayana, presenting Raghava\'s battle against Lankesh on a blockbuster scale.' },
+  { id:10, title:'Kalki 2898 AD', year:'2024', type:'Movie', icon:'🐎', img:'',
+    desc:'A science-fiction vision of Kalki, the prophesied final avatar of Vishnu, set in a dystopian future woven with Mahabharata references.' },
+  { id:11, title:'Jai Santoshi Maa', year:'1975', type:'Movie', icon:'🙏', img:'',
+    desc:'A landmark devotional classic chronicling a devotee\'s unwavering faith in the goddess Santoshi Maa against trials sent by rival deities.' },
+  { id:12, title:'Ramayana: The Legend of Prince Rama', year:'1992', type:'Movie', icon:'🏹', img:'',
+    desc:'An India-Japan animated feature retelling the Ramayana with hand-drawn artistry, from Rama\'s exile to the battle with Ravana.' },
+  { id:13, title:'Hanuman', year:'2005', type:'Movie', icon:'🐒', img:'',
+    desc:'An animated origin story following young Anjaneya as he discovers his divine strength and devotion, becoming the Hanuman of legend.' },
+  { id:14, title:'Bal Ganesh', year:'2007', type:'Movie', icon:'🐘', img:'',
+    desc:'An animated feature following the mischievous, wise childhood exploits of Ganesha, son of Shiva and Parvati.' },
+  { id:15, title:'Sita Sings the Blues', year:'2008', type:'Movie', icon:'🎨', img:'',
+    desc:'An indie animated retelling of the Ramayana from Sita\'s point of view, interwoven with a modern breakup narrative and jazz-age songs.' },
+  { id:16, title:'Ramayana: The Epic', year:'2010', type:'Movie', icon:'🏹', img:'',
+    desc:'A CGI-animated adaptation compressing the Ramayana\'s major arcs — exile, abduction, and the war for Lanka — into a single feature.' },
+  { id:17, title:'Sri Rama Rajyam', year:'2011', type:'Movie', icon:'👑', img:'',
+    desc:'A devotional Telugu retelling focusing on Rama\'s righteous reign in Ayodhya following his return from exile.' },
+  { id:18, title:'Hanuman Da Damdaar', year:'2017', type:'Movie', icon:'🐒', img:'',
+    desc:'An animated adventure reimagining young Hanuman\'s coming-of-age with humor, action, and classic mythological motifs.' },
+  { id:19, title:'OMG 2', year:'2023', type:'Movie', icon:'🕉️', img:'',
+    desc:'A spiritual drama invoking Lord Shiva\'s devotee Manav as a mortal takes on a rigid school system, echoing themes of dharma and duty.' },
+  { id:20, title:'HanuMan', year:'2024', type:'Movie', icon:'🦸', img:'',
+    desc:'A Telugu superhero film in which a village youth gains Hanuman-inspired powers, blending mythology with modern superhero storytelling.' },
+  { id:21, title:'Vishnu Puran', year:'2000', type:'TV Series', icon:'🪷', img:'',
+    desc:'A serial dramatizing the Vishnu Purana\'s cosmology, the ten avatars of Vishnu, and the eternal struggle between dharma and adharma.' },
+  { id:22, title:'Om Namah Shivay', year:'1997', type:'TV Series', icon:'🔱', img:'',
+    desc:'A devotional serial centered on the many legends, boons, and battles associated with Lord Shiva.' },
+  { id:23, title:'Jai Hanuman', year:'1997', type:'TV Series', icon:'🐒', img:'',
+    desc:'A serial dramatizing the many legends of Hanuman, from his birth and boyhood mischief to his devotion to Rama.' },
+  { id:24, title:'Devon Ke Dev... Mahadev', year:'2011', type:'TV Series', icon:'🔱', img:'',
+    desc:'A long-running serial following Shiva and Parvati across cosmic ages, weaving together major Puranic legends of the Mahadev.' },
+  { id:25, title:'Mahabharat (2013)', year:'2013', type:'TV Series', icon:'⚔️', img:'',
+    desc:'A high-production retelling of the Kurukshetra saga for Star Plus, covering the Pandava-Kaurava rivalry through to the great war.' },
+  { id:26, title:'Siya Ke Ram', year:'2015', type:'TV Series', icon:'🏹', img:'',
+    desc:'A retelling of the Ramayana centered on Sita\'s perspective, following her strength and trials alongside Rama\'s exile and return.' },
+  { id:27, title:'Suryaputra Karn', year:'2015', type:'TV Series', icon:'☀️', img:'',
+    desc:'A serial devoted to Karna, the sun-god\'s son, tracing his rise from an outcast charioteer\'s ward to a tragic hero of the Mahabharata.' },
+  { id:28, title:'Porus', year:'2017', type:'TV Series', icon:'🛡️', img:'',
+    desc:'An epic drama set in ancient India blending historical legend with mythic storytelling around King Porus.' },
+  { id:29, title:'Vighnaharta Ganesh', year:'2017', type:'TV Series', icon:'🐘', img:'',
+    desc:'A long-running serial recounting the many legends and miracles of Lord Ganesha, remover of obstacles.' },
+  { id:30, title:'Karmphal Daata Shani', year:'2016', type:'TV Series', icon:'🪐', img:'',
+    desc:'A serial dramatizing the legends of Shani Dev, the deity of karma and justice, and the consequences he metes out.' },
+  { id:31, title:'Mahakali – Anth Hi Aarambh Hai', year:'2017', type:'TV Series', icon:'🗡️', img:'',
+    desc:'A serial exploring the origins and fierce legends of the goddess Kali as the destroyer of evil forces.' },
+  { id:32, title:'RadhaKrishn', year:'2018', type:'TV Series', icon:'🪈', img:'',
+    desc:'A serial retelling the divine love and adventures of Radha and Krishna, drawing on Puranic legend and Krishna Leela.' },
+  { id:33, title:'Baal Shiv', year:'2016', type:'TV Series', icon:'🔱', img:'',
+    desc:'A serial imagining the childhood years of Lord Shiva and his early cosmic feats.' },
+  { id:34, title:'Dharm Yoddha Garud', year:'2020', type:'TV Series', icon:'🦅', img:'',
+    desc:'A serial centered on Garuda, the divine eagle and vahana of Vishnu, and his mythic trials of devotion and courage.' },
+  { id:35, title:'Sankatmochan Mahabali Hanumaan', year:'2020', type:'TV Series', icon:'🐒', img:'',
+    desc:'A serial following Hanuman\'s many legendary feats of strength, devotion, and problem-solving across the ages.' },
+  { id:36, title:'Ramyug', year:'2019', type:'TV Series', icon:'🏹', img:'',
+    desc:'A serial retelling of the Ramayana with modernized visual storytelling, following Rama\'s journey from Ayodhya to Lanka.' },
+  { id:37, title:'Karn Sangini', year:'2018', type:'TV Series', icon:'☀️', img:'',
+    desc:'A Mahabharata spin-off centered on Uruvi, wife of Karna, and her devotion amid the unfolding war.' },
+  { id:38, title:'Shiv Shakti – Tap Tyaag Tandav', year:'2022', type:'TV Series', icon:'🔱', img:'',
+    desc:'A serial exploring the union of Shiva and Shakti and the cosmic balance of creation and destruction they represent.' },
+  { id:39, title:'The Legend of Hanuman', year:'2021', type:'Web Series', icon:'🐒', img:'',
+    desc:'An animated web series tracing Hanuman\'s journey from a curious, powerful child to the devoted hero of the Ramayana.' },
+  { id:40, title:'Vishwamitra', year:'2022', type:'TV Series', icon:'🕉️', img:'',
+    desc:'A serial dramatizing sage Vishwamitra\'s transformation from a mighty king to one of the great rishis of Vedic legend.' }
+];
+let movieDB = lsGet('yama_movies_db', null) || DEFAULT_MOVIES.slice();
+
+/* ---------------------------- NAVIGATION ---------------------------- */
+const ALL_SCREENS = ['start-screen','intro-screen','home-screen','entry-screen','interrogation-screen','weighing-screen','final-screen','naraka3d-screen','about-screen','yugas-screen','notes-screen','admin-screen','achievements-screen','leaderboard-screen','movies-screen'];
+const IMMERSIVE = ['start-screen','intro-screen','weighing-screen','final-screen','interrogation-screen'];
+
+function go(id){
+  const pt = document.getElementById('page-transition');
+  if(pt){ pt.classList.remove('wipe'); void pt.offsetWidth; pt.classList.add('wipe'); }
+  ALL_SCREENS.forEach(s=>document.getElementById(s).classList.add('hidden'));
+  document.getElementById(id).classList.remove('hidden');
+  document.getElementById('top-nav').classList.toggle('hidden', IMMERSIVE.includes(id));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.toggle('active', b.dataset.target===id));
+  window.scrollTo({top:0, behavior:'smooth'});
+  if(id==='home-screen'){ renderDashboard(); updateKarmaMeter(); initHall3D(); startOmenTicker(); }
+  if(id==='notes-screen') renderNotes();
+  if(id==='admin-screen' && isAdmin) renderAdmin();
+  if(id==='entry-screen') renderSins();
+  if(id==='naraka3d-screen') initChamber3D();
+  if(id==='achievements-screen') renderAchievements();
+  if(id==='leaderboard-screen') renderLeaderboard();
+  if(id==='movies-screen') renderMovies();
+}
+
+function triggerHaptic(ms){ if(navigator.vibrate) navigator.vibrate(ms); }
+
+function toast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  clearTimeout(window.__toastTimer);
+  window.__toastTimer = setTimeout(()=>t.classList.remove('show'), 2400);
+}
+
+/* ---------------------------- INTRO / START ---------------------------- */
+function unlockAudio(){
+  document.getElementById('start-screen').classList.add('hidden');
+  document.getElementById('intro-screen').classList.remove('hidden');
+  const introVid = document.getElementById('intro-vid');
+  introVid.classList.remove('hidden');
+  introVid.play().catch(()=>console.log('Interaction required for autoplay'));
+
+  let count = 5;
+  const timerEl = document.getElementById('timer');
+  timerEl.innerText = '⏳ CONNECTING TO YAMALOKA... ' + count;
+  const t = setInterval(()=>{
+    count--;
+    if(count>0){ timerEl.innerText = '⏳ CONNECTING TO YAMALOKA... ' + count; }
+    else{ clearInterval(t); timerEl.innerText = '✅ CONNECTION ESTABLISHED'; document.getElementById('enter-btn').classList.remove('hidden'); }
+  },1000);
+}
+
+function startApp(){
+  document.getElementById('intro-vid').classList.add('hidden');
+  document.getElementById('intro-vid').pause();
+  go('home-screen');
+}
+
+/* ---------------------------- LANGUAGE ---------------------------- */
+function setLang(lang){
+  currentLang = lang;
+  document.getElementById('lang-select-nav').value = lang;
+  const es = document.getElementById('lang-select'); if(es) es.value = lang;
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const key = el.getAttribute('data-i18n');
+    if(STR[lang] && STR[lang][key]) el.textContent = STR[lang][key];
+  });
+  document.documentElement.lang = lang;
+  renderSins(); renderNotes();
+  if(!document.getElementById('home-screen').classList.contains('hidden')) renderDashboard();
+}
+
+/* ---------------------------- DASHBOARD ---------------------------- */
+function renderDashboard(){
+  const total = judgmentLog.length;
+  const counts = {};
+  judgmentLog.forEach(j=>{ counts[j.narakaId] = (counts[j.narakaId]||0)+1; });
+  let topId = null, topCount = 0;
+  Object.entries(counts).forEach(([k,v])=>{ if(v>topCount){topCount=v; topId=k;} });
+  const topEntry = database.find(d=>String(d.id)===String(topId));
+  const avgAge = total ? Math.round(judgmentLog.reduce((a,j)=>a+(j.age||0),0)/total) : 0;
+
+  document.getElementById('dashboard-stats').innerHTML = `
+    <div class="stat-card"><div class="stat-num">${total}</div><div class="stat-lbl">Judgments Delivered</div></div>
+    <div class="stat-card"><div class="stat-num">${database.length}</div><div class="stat-lbl">Narakas on Record</div></div>
+    <div class="stat-card"><div class="stat-num" style="font-size:16px;">${topEntry ? topEntry.vName.en.replace(/[^\w\s]/g,'').trim() : '—'}</div><div class="stat-lbl">Most Common Fate</div></div>
+    <div class="stat-card"><div class="stat-num">${avgAge||'—'}</div><div class="stat-lbl">Average Age</div></div>
+  `;
+}
+
+/* ---------------------------- SIN LIST ---------------------------- */
+function renderSins(){
+  const list = document.getElementById('sin-list');
+  if(!list) return;
+  list.innerHTML = '';
+  database.forEach(item=>{
+    const btn = document.createElement('div');
+    btn.className = 'sin-item' + (selectedSin && selectedSin.id===item.id ? ' highlight' : '');
+    btn.innerHTML = `<span>${item.sin[currentLang] || item.sin.en}</span><span class="tag">${item.vName[currentLang]||item.vName.en}</span>`;
+    btn.onclick = ()=>{ triggerHaptic(20); selectedSin = item; renderSins(); };
+    list.appendChild(btn);
+  });
+}
+
+/* ---------------------------- CHITRAGUPTA'S INTERROGATION ---------------------------- */
+const INTERROGATION_QUESTIONS = [
+  { q:'Did you ever try to make amends for what you did?', options:[
+      {label:'Yes, I sought to repair the harm.', karma:14},
+      {label:'I meant to, but never did.', karma:-4},
+      {label:'No. I felt no need to.', karma:-16} ]},
+  { q:'When you close your eyes, do you feel guilt?', options:[
+      {label:'Constantly. It never leaves me.', karma:10},
+      {label:'Sometimes, in quiet moments.', karma:2},
+      {label:'No guilt. I would do it again.', karma:-18} ]}
+];
+let interrogationStep = 0;
+
+function beginInterrogation(){
+  const name = document.getElementById('name').value.trim();
+  const age = document.getElementById('age').value.trim();
+  const err = document.getElementById('entry-error');
+  if(!name || !age){ err.textContent = 'Name and Age are required before judgment can be rendered.'; return; }
+  if(!selectedSin){ err.textContent = 'Please select a sin, or use Auto-Weigh by Karma.'; return; }
+  err.textContent = '';
+  interrogationStep = 0;
+  go('interrogation-screen');
+  renderInterrogationStep();
+}
+
+function renderInterrogationStep(){
+  const body = document.getElementById('interrogation-body');
+  if(interrogationStep >= INTERROGATION_QUESTIONS.length){ startWeighing(); return; }
+  const q = INTERROGATION_QUESTIONS[interrogationStep];
+  body.innerHTML = `<div class="interrogation-q">
+    <div class="iq-text">"${q.q}"</div>
+    <div class="iq-options">${q.options.map((o,i)=>`<button class="btn btn-spectral btn-sm" onclick="answerInterrogation(${i})">${o.label}</button>`).join('')}</div>
+  </div>`;
+}
+
+function answerInterrogation(i){
+  const q = INTERROGATION_QUESTIONS[interrogationStep];
+  adjustKarma(q.options[i].karma);
+  triggerHaptic(40);
+  interrogationStep++;
+  renderInterrogationStep();
+}
+
+/* ---------------------------- KARMA SCORE SYSTEM ---------------------------- */
+let karmaScore = lsGet('yama_karma_score', 50);
+function adjustKarma(delta){
+  karmaScore = Math.max(0, Math.min(100, karmaScore + delta));
+  lsSet('yama_karma_score', karmaScore);
+  updateKarmaMeter();
+}
+function updateKarmaMeter(){
+  const fill = document.getElementById('karma-fill');
+  const label = document.getElementById('karma-score-label');
+  if(!fill) return;
+  fill.style.width = karmaScore + '%';
+  let text = 'Balanced';
+  if(karmaScore >= 75) text = '☀️ Merit Rising';
+  else if(karmaScore >= 55) text = 'Leaning Toward Punya';
+  else if(karmaScore <= 25) text = '🩸 Deep in Sin';
+  else if(karmaScore <= 45) text = 'Leaning Toward Paapa';
+  label.textContent = text + ' (' + karmaScore + '/100)';
+}
+
+function calculateKarma(){
+  triggerHaptic(200);
+  const nameLen = document.getElementById('name').value.length || 5;
+  const age = parseInt(document.getElementById('age').value) || 20;
+  const confessionLen = document.getElementById('confession').value.length;
+  const seed = (nameLen*3 + age*2 + confessionLen) % database.length;
+  selectedSin = database[seed];
+  renderSins();
+  adjustKarma(-6);
+  toast('Karma calculated — a sin has been selected for you.');
+}
+
+function startVoiceConfession(){
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if(!SR){ toast('Voice recognition is not supported in this browser.'); return; }
+  const recognition = new SR();
+  recognition.lang = currentLang==='hi' ? 'hi-IN' : currentLang==='kn' ? 'kn-IN' : 'en-US';
+  const btn = document.getElementById('voice-btn');
+  btn.textContent = '🎙️ Listening...';
+  recognition.onresult = (e)=>{
+    const t = e.results[0][0].transcript;
+    document.getElementById('confession').value = t;
+    const low = t.toLowerCase();
+    const match = database.find(item => low.includes((item.sin.en.replace(/[^\w\s]/g,'')).toLowerCase().trim()));
+    if(match){ selectedSin = match; renderSins(); toast('Matched a sin from your confession.'); }
+  };
+  recognition.onerror = ()=>{ toast('Could not capture audio. Please try again.'); };
+  recognition.onend = ()=>{ btn.innerHTML = '🎙️ <span data-i18n="entry.voice">Whisper Confession</span>'; };
+  recognition.start();
+}
+
+/* --- Glitch effect while typing the confession --- */
+document.addEventListener('input', (e)=>{
+  if(e.target && e.target.id==='confession'){
+    e.target.classList.remove('glitch-type'); void e.target.offsetWidth; e.target.classList.add('glitch-type');
+  }
+});
+
+/* ---------------------------- ENTRY VALIDATION + WEIGHING ---------------------------- */
+function startWeighing(){
+  triggerHaptic(100);
+  go('weighing-screen');
+
+  const beam = document.getElementById('beam-group');
+  const status = document.getElementById('weigh-status');
+  const tilt = (Math.random()>0.5 ? 1 : -1) * (10 + Math.random()*8);
+  requestAnimationFrame(()=>{ beam.style.transform = `rotate(${tilt}deg)`; });
+
+  let step = 0;
+  const messages = ['CALCULATING KARMIC WEIGHT...','CONSULTING CHITRAGUPTA\'S LEDGER...','THE SCALES SETTLE...'];
+  const msgTimer = setInterval(()=>{ status.textContent = messages[step % messages.length]; step++; }, 900);
+
+  /* Yamadoot encounter: a chance of an extra shake/whisper mid-weighing */
+  const doot = setTimeout(()=>{
+    if(Math.random() < 0.55){
+      document.body.classList.add('shake');
+      setTimeout(()=>document.body.classList.remove('shake'), 300);
+      const cap = document.getElementById('whisper-caption');
+      cap.textContent = '"The Yamadoots have arrived..."';
+      cap.classList.add('show');
+      setTimeout(()=>cap.classList.remove('show'), 1800);
+    }
+  }, 1500);
+
+  setTimeout(()=>{
+    clearInterval(msgTimer);
+    clearTimeout(doot);
+    renderJudgment();
+    go('final-screen');
+    document.body.classList.add('shake');
+    setTimeout(()=>document.body.classList.remove('shake'), 600);
+  }, 2900);
+}
+
+/* ---------------------------- JUDGMENT RESULT + LOG ---------------------------- */
+function renderJudgment(){
+  const name = document.getElementById('name').value.trim() || 'Soul';
+  const age = parseInt(document.getElementById('age').value)||0;
+  document.getElementById('v-name').textContent = name + "'s Fate: " + selectedSin.vName[currentLang];
+  document.getElementById('v-desc').textContent = selectedSin.vDesc[currentLang];
+  document.getElementById('v-modern').textContent = selectedSin.modern || 'No modern parallel recorded for this entry.';
+
+  const judgeVid = document.getElementById('judge-vid');
+  judgeVid.classList.remove('hidden');
+  judgeVid.currentTime = 0;
+  judgeVid.play().catch(()=>console.log('Autoplay permission denied for judgment video'));
+
+  triggerHaptic(500);
+  adjustKarma(-8);
+
+  judgmentLog.push({ name, age, narakaId:selectedSin.id, sin:selectedSin.sin.en, date:new Date().toISOString() });
+  lsSet('yama_judgment_log', judgmentLog);
+
+  drawCertificate(name, age, selectedSin);
+  checkAchievements();
+}
+
+function resetJourney(){
+  document.getElementById('judge-vid').classList.add('hidden');
+  document.getElementById('judge-vid').pause();
+  document.getElementById('name').value='';
+  document.getElementById('age').value='';
+  document.getElementById('confession').value='';
+  selectedSin = null;
+  go('home-screen');
+}
+
+/* ---------------------------- CERTIFICATE (Canvas) ---------------------------- */
+function drawCertificate(name, age, entry, canvasId){
+  const c = document.getElementById(canvasId || 'cert-canvas');
+  const ctx = c.getContext('2d');
+  const W=c.width, H=c.height;
+
+  ctx.fillStyle = '#0a0605'; ctx.fillRect(0,0,W,H);
+  const grad = ctx.createRadialGradient(W/2,H*0.15,50,W/2,H/2,W*0.7);
+  grad.addColorStop(0,'#2a0d0d'); grad.addColorStop(1,'#0a0605');
+  ctx.fillStyle = grad; ctx.fillRect(0,0,W,H);
+
+  ctx.strokeStyle = '#d4af37'; ctx.lineWidth = 3;
+  ctx.strokeRect(24,24,W-48,H-48);
+  ctx.lineWidth = 1; ctx.strokeRect(34,34,W-68,H-68);
+
+  ctx.textAlign = 'center';
+  ctx.fillStyle = '#d4af37';
+  ctx.font = '600 16px Georgia, serif';
+  ctx.fillText('⚖️  C E R T I F I C A T E   O F   J U D G M E N T  ⚖️', W/2, 90);
+
+  ctx.fillStyle = '#c94a2d';
+  ctx.font = '700 30px Georgia, serif';
+  ctx.fillText('YAMA DHARMA TERMINAL', W/2, 130);
+
+  ctx.fillStyle = '#f1e6d3';
+  ctx.font = 'italic 18px Georgia, serif';
+  ctx.fillText('This certifies that the soul of', W/2, 200);
+
+  ctx.fillStyle = '#d4af37';
+  ctx.font = '700 34px Georgia, serif';
+  ctx.fillText(name, W/2, 250);
+
+  ctx.fillStyle = '#f1e6d3';
+  ctx.font = '16px Georgia, serif';
+  ctx.fillText('Age at judgment: ' + (age||'—'), W/2, 280);
+
+  ctx.fillStyle = '#c94a2d';
+  ctx.font = 'italic 18px Georgia, serif';
+  ctx.fillText('has been weighed for the transgression of', W/2, 330);
+
+  ctx.fillStyle = '#f1e6d3';
+  ctx.font = '600 22px Georgia, serif';
+  wrapText(ctx, stripEmoji(entry.sin.en), W/2, 365, W-160, 28);
+
+  ctx.fillStyle = '#c94a2d';
+  ctx.font = 'italic 18px Georgia, serif';
+  ctx.fillText('and is hereby sentenced to', W/2, 425);
+
+  ctx.fillStyle = '#d4af37';
+  ctx.font = '700 26px Georgia, serif';
+  ctx.fillText(stripEmoji(entry.vName.en), W/2, 465);
+
+  ctx.fillStyle = '#e7d9c4';
+  ctx.font = '15px Georgia, serif';
+  wrapText(ctx, stripEmoji(entry.vDesc.en), W/2, 500, W-160, 22);
+
+  ctx.fillStyle = '#8a746a';
+  ctx.font = '13px Georgia, serif';
+  ctx.fillText('Rendered ' + new Date().toLocaleDateString() + '  ·  Sealed by the Court of Yamaraja', W/2, H-50);
+  ctx.fillText('A dramatized educational illustration inspired by the Garuda Purana', W/2, H-30);
+}
+function stripEmoji(s){ return s.replace(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}\u{FE0F}]/gu,'').trim(); }
+function wrapText(ctx, text, x, y, maxWidth, lineHeight){
+  const words = text.split(' ');
+  let line = '', yy = y;
+  for(let n=0;n<words.length;n++){
+    const test = line + words[n] + ' ';
+    if(ctx.measureText(test).width > maxWidth && n>0){ ctx.fillText(line, x, yy); line = words[n]+' '; yy += lineHeight; }
+    else{ line = test; }
+  }
+  ctx.fillText(line, x, yy);
+}
+function downloadCertificate(){
+  const c = document.getElementById('cert-canvas');
+  const a = document.createElement('a');
+  a.download = 'yama-judgment-certificate.png';
+  a.href = c.toDataURL('image/png');
+  a.click();
+  toast('Certificate downloaded.');
+}
+
+/* ---------------------------- EDUCATIONAL NOTES ---------------------------- */
+function renderNotes(){
+  const el = document.getElementById('notes-list');
+  if(!el) return;
+  el.innerHTML = database.map(item=>`
+    <div style="border-bottom:1px solid var(--line); padding:12px 0;">
+      <div style="display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap;">
+        <strong style="color:var(--gold);">${item.sin[currentLang]||item.sin.en}</strong>
+        <span class="badge">${item.vName.en.replace(/[^\w\s]/g,'').trim()}</span>
+      </div>
+      <p style="margin:6px 0 0; font-size:14px; color:#e7d9c4;">${item.modern||''}</p>
+    </div>`).join('');
+}
+
+/* ---------------------------- ADMIN PANEL ---------------------------- */
+const ADMIN_PASSCODE = 'yama108';
+function adminLogin(){
+  const pass = document.getElementById('admin-pass').value;
+  if(pass === ADMIN_PASSCODE){
+    isAdmin = true;
+    document.getElementById('admin-login').classList.add('hidden');
+    document.getElementById('admin-panel').classList.remove('hidden');
+    document.getElementById('admin-error').textContent='';
+    renderAdmin();
+    toast('Ledger unlocked.');
+  } else {
+    document.getElementById('admin-error').textContent = 'Incorrect passcode. Try again.';
+  }
+}
+function adminLogout(){
+  isAdmin = false;
+  document.getElementById('admin-login').classList.remove('hidden');
+  document.getElementById('admin-panel').classList.add('hidden');
+  document.getElementById('admin-pass').value='';
+}
+
+function renderAdmin(){
+  document.getElementById('admin-stats').innerHTML = `
+    <div class="stat-card"><div class="stat-num">${database.length}</div><div class="stat-lbl">Total Sin Entries</div></div>
+    <div class="stat-card"><div class="stat-num">${judgmentLog.length}</div><div class="stat-lbl">Judgments Logged</div></div>
+    <div class="stat-card"><div class="stat-num">${HAS_LS?'ON':'OFF'}</div><div class="stat-lbl">Persistent Storage</div></div>
+    <div class="stat-card"><div class="stat-num">3</div><div class="stat-lbl">Languages Active</div></div>
+  `;
+  const table = document.getElementById('admin-table');
+  table.innerHTML = `<tr><th>#</th><th>Sin (EN)</th><th>Naraka</th><th>Actions</th></tr>` +
+    database.map((d,i)=>`<tr>
+      <td>${i+1}</td>
+      <td>${d.sin.en}</td>
+      <td>${d.vName.en}</td>
+      <td>
+        <button class="btn-ghost btn btn-sm" onclick="editSinEntry(${d.id})">✏️ Edit</button>
+        <button class="btn-ghost btn btn-sm" onclick="deleteSinEntry(${d.id})">🗑️ Delete</button>
+      </td>
+    </tr>`).join('');
+  renderAdminMovieTable();
+  renderAdminCertificates();
+}
+
+function clearAdminForm(){
+  ['edit-id','f-sin-en','f-sin-hi','f-sin-kn','f-vname-en','f-vname-hi','f-vname-kn','f-vdesc-en','f-vdesc-hi','f-vdesc-kn','f-modern']
+    .forEach(id=>document.getElementById(id).value='');
+}
+
+function editSinEntry(id){
+  const d = database.find(x=>x.id===id);
+  if(!d) return;
+  document.getElementById('edit-id').value = d.id;
+  document.getElementById('f-sin-en').value = d.sin.en; document.getElementById('f-sin-hi').value = d.sin.hi; document.getElementById('f-sin-kn').value = d.sin.kn;
+  document.getElementById('f-vname-en').value = d.vName.en; document.getElementById('f-vname-hi').value = d.vName.hi; document.getElementById('f-vname-kn').value = d.vName.kn;
+  document.getElementById('f-vdesc-en').value = d.vDesc.en; document.getElementById('f-vdesc-hi').value = d.vDesc.hi; document.getElementById('f-vdesc-kn').value = d.vDesc.kn;
+  document.getElementById('f-modern').value = d.modern||'';
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function saveSinEntry(){
+  const idVal = document.getElementById('edit-id').value;
+  const sinEn = document.getElementById('f-sin-en').value.trim();
+  if(!sinEn){ toast('Sin (EN) is required.'); return; }
+  const entry = {
+    id: idVal ? parseInt(idVal) : Date.now(),
+    sin:{ en:sinEn, hi:document.getElementById('f-sin-hi').value.trim()||sinEn, kn:document.getElementById('f-sin-kn').value.trim()||sinEn },
+    vName:{ en:document.getElementById('f-vname-en').value.trim()||'UNNAMED NARAKA', hi:document.getElementById('f-vname-hi').value.trim(), kn:document.getElementById('f-vname-kn').value.trim() },
+    vDesc:{ en:document.getElementById('f-vdesc-en').value.trim(), hi:document.getElementById('f-vdesc-hi').value.trim(), kn:document.getElementById('f-vdesc-kn').value.trim() },
+    modern: document.getElementById('f-modern').value.trim()
+  };
+  if(idVal){
+    const idx = database.findIndex(x=>x.id===entry.id);
+    if(idx>-1) database[idx] = entry;
+  } else {
+    database.push(entry);
+  }
+  lsSet('yama_sins_db', database);
+  clearAdminForm();
+  renderAdmin();
+  toast('Entry saved.');
+}
+
+function deleteSinEntry(id){
+  if(!confirm('Delete this sin entry permanently?')) return;
+  database = database.filter(x=>x.id!==id);
+  lsSet('yama_sins_db', database);
+  renderAdmin();
+  toast('Entry deleted.');
+}
+
+function resetToDefaults(){
+  if(!confirm('This will overwrite all custom entries with the default 28 Narakas. Continue?')) return;
+  database = DEFAULT_DB.slice();
+  lsSet('yama_sins_db', database);
+  renderAdmin();
+  toast('Reset to default 28 Narakas.');
+}
+
+function clearJudgmentLog(){
+  if(!confirm('Clear all logged judgments? This cannot be undone.')) return;
+  judgmentLog = [];
+  lsSet('yama_judgment_log', judgmentLog);
+  renderAdmin();
+  toast('Judgment log cleared.');
+}
+
+/* ---------------------------- ADMIN: ISSUED CERTIFICATES ---------------------------- */
+function renderAdminCertificates(){
+  const table = document.getElementById('admin-cert-table');
+  if(!table) return;
+  if(!judgmentLog.length){
+    table.innerHTML = `<tr><th>#</th><th>Name</th><th>Age</th><th>Sin</th><th>Naraka</th><th>Date</th><th>Actions</th></tr>
+      <tr><td colspan="7" style="text-align:center; color:var(--ash); padding:16px;">No certificates issued yet.</td></tr>`;
+    closeAdminCertPreview();
+    return;
+  }
+  table.innerHTML = `<tr><th>#</th><th>Name</th><th>Age</th><th>Sin</th><th>Naraka</th><th>Date</th><th>Actions</th></tr>` +
+    judgmentLog.map((j,idx)=>{
+      const d = database.find(x=>String(x.id)===String(j.narakaId)) || DEFAULT_DB.find(x=>String(x.id)===String(j.narakaId));
+      const narakaName = d ? d.vName.en : 'Unknown Naraka';
+      return `<tr>
+        <td>${idx+1}</td>
+        <td>${escapeHtml(j.name)}</td>
+        <td>${j.age || '—'}</td>
+        <td>${escapeHtml(j.sin)}</td>
+        <td>${escapeHtml(narakaName)}</td>
+        <td>${new Date(j.date).toLocaleString()}</td>
+        <td><button class="btn-ghost btn btn-sm" onclick="viewIssuedCertificate(${idx})">📜 View</button></td>
+      </tr>`;
+    }).reverse().join('');
+}
+
+function viewIssuedCertificate(idx){
+  const j = judgmentLog[idx];
+  if(!j) return;
+  const d = database.find(x=>String(x.id)===String(j.narakaId)) || DEFAULT_DB.find(x=>String(x.id)===String(j.narakaId));
+  const entry = d || {
+    vName:{ en:'UNKNOWN NARAKA' },
+    vDesc:{ en:'This naraka entry has since been removed or edited from the ledger.' },
+    sin:{ en:j.sin || 'Unrecorded sin' }
+  };
+  drawCertificate(j.name, j.age, entry, 'admin-cert-canvas');
+  document.getElementById('admin-cert-preview-wrap').classList.remove('hidden');
+  document.getElementById('admin-cert-preview-wrap').scrollIntoView({ behavior:'smooth', block:'center' });
+  toast('Certificate loaded for review.');
+}
+
+function closeAdminCertPreview(){
+  const wrap = document.getElementById('admin-cert-preview-wrap');
+  if(wrap) wrap.classList.add('hidden');
+}
+
+function downloadAdminCertificate(){
+  const c = document.getElementById('admin-cert-canvas');
+  const a = document.createElement('a');
+  a.download = 'yama-admin-certificate.png';
+  a.href = c.toDataURL('image/png');
+  a.click();
+  toast('Certificate downloaded.');
+}
+
+/* ---------------------------- MOVIE LIBRARY ---------------------------- */
+function renderMovies(){
+  const grid = document.getElementById('movie-grid');
+  if(!grid) return;
+  grid.innerHTML = movieDB.map(m=>`
+    <div class="movie-card">
+      ${m.img ? `<img class="movie-poster" src="${m.img}" alt="${escapeHtml(m.title)} poster" onerror="this.outerHTML='<div class=&quot;movie-poster-fallback&quot;>${m.icon||'🎬'}</div>'">`
+               : `<div class="movie-poster-fallback">${m.icon||'🎬'}</div>`}
+      <div class="movie-body">
+        <div class="movie-title">${escapeHtml(m.title)}</div>
+        <div class="movie-meta">${escapeHtml(m.year||'')} · ${escapeHtml(m.type||'Movie')}</div>
+        <div class="movie-desc">${escapeHtml(m.desc||'')}</div>
+      </div>
+    </div>`).join('');
+  localStorage.setItem('yama_visited_movies','1');
+  checkAchievements();
+}
+
+function escapeHtml(str){
+  const d = document.createElement('div');
+  d.textContent = str==null ? '' : String(str);
+  return d.innerHTML;
+}
+
+function renderAdminMovieTable(){
+  const table = document.getElementById('admin-movie-table');
+  if(!table) return;
+  table.innerHTML = `<tr><th>#</th><th>Title</th><th>Year</th><th>Type</th><th>Actions</th></tr>` +
+    movieDB.map((m,i)=>`<tr>
+      <td>${i+1}</td>
+      <td>${escapeHtml(m.title)}</td>
+      <td>${escapeHtml(m.year)}</td>
+      <td>${escapeHtml(m.type)}</td>
+      <td>
+        <button class="btn-ghost btn btn-sm" onclick="editMovieEntry(${m.id})">✏️ Edit</button>
+        <button class="btn-ghost btn btn-sm" onclick="deleteMovieEntry(${m.id})">🗑️ Delete</button>
+      </td>
+    </tr>`).join('');
+}
+
+function handleMovieImageUpload(e){
+  const file = e.target.files[0];
+  if(!file) return;
+  if(file.size > 2*1024*1024){ toast('Please choose an image under 2MB.'); e.target.value=''; return; }
+  const reader = new FileReader();
+  reader.onload = ()=>{
+    document.getElementById('f-movie-img').value = reader.result;
+    const prev = document.getElementById('movie-thumb-preview');
+    prev.src = reader.result; prev.classList.remove('hidden');
+  };
+  reader.readAsDataURL(file);
+}
+
+function clearMovieForm(){
+  ['edit-movie-id','f-movie-title','f-movie-year','f-movie-desc','f-movie-icon','f-movie-img','f-movie-file']
+    .forEach(id=>{ const el=document.getElementById(id); if(el) el.value=''; });
+  document.getElementById('f-movie-type').value = 'Movie';
+  const prev = document.getElementById('movie-thumb-preview');
+  prev.classList.add('hidden'); prev.src='';
+}
+
+function editMovieEntry(id){
+  const m = movieDB.find(x=>x.id===id);
+  if(!m) return;
+  document.getElementById('edit-movie-id').value = m.id;
+  document.getElementById('f-movie-title').value = m.title;
+  document.getElementById('f-movie-year').value = m.year;
+  document.getElementById('f-movie-type').value = m.type;
+  document.getElementById('f-movie-desc').value = m.desc;
+  document.getElementById('f-movie-icon').value = m.icon;
+  document.getElementById('f-movie-img').value = m.img;
+  const prev = document.getElementById('movie-thumb-preview');
+  if(m.img){ prev.src = m.img; prev.classList.remove('hidden'); } else { prev.classList.add('hidden'); }
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function saveMovieEntry(){
+  const idVal = document.getElementById('edit-movie-id').value;
+  const title = document.getElementById('f-movie-title').value.trim();
+  if(!title){ toast('Movie title is required.'); return; }
+  const entry = {
+    id: idVal ? parseInt(idVal) : Date.now(),
+    title,
+    year: document.getElementById('f-movie-year').value.trim(),
+    type: document.getElementById('f-movie-type').value,
+    desc: document.getElementById('f-movie-desc').value.trim(),
+    icon: document.getElementById('f-movie-icon').value.trim() || '🎬',
+    img: document.getElementById('f-movie-img').value.trim()
+  };
+  if(idVal){
+    const idx = movieDB.findIndex(x=>x.id===entry.id);
+    if(idx>-1) movieDB[idx] = entry;
+  } else {
+    movieDB.push(entry);
+  }
+  lsSet('yama_movies_db', movieDB);
+  clearMovieForm();
+  renderAdminMovieTable();
+  toast('Movie saved to the library.');
+}
+
+function deleteMovieEntry(id){
+  if(!confirm('Delete this movie/series entry permanently?')) return;
+  movieDB = movieDB.filter(x=>x.id!==id);
+  lsSet('yama_movies_db', movieDB);
+  renderAdminMovieTable();
+  toast('Movie entry deleted.');
+}
+
+function resetMoviesToDefaults(){
+  if(!confirm('This will overwrite all custom movie entries with the default library. Continue?')) return;
+  movieDB = DEFAULT_MOVIES.slice();
+  lsSet('yama_movies_db', movieDB);
+  renderAdminMovieTable();
+  toast('Movie library reset to defaults.');
+}
+
+/* ---------------------------- RIPPLE EFFECT (all .btn) ---------------------------- */
+document.addEventListener('click', (e)=>{
+  const btn = e.target.closest('.btn');
+  if(!btn) return;
+  const rect = btn.getBoundingClientRect();
+  const r = document.createElement('span');
+  const size = Math.max(rect.width, rect.height);
+  r.className = 'ripple';
+  r.style.width = r.style.height = size + 'px';
+  r.style.left = (e.clientX - rect.left - size/2) + 'px';
+  r.style.top = (e.clientY - rect.top - size/2) + 'px';
+  btn.style.position = btn.style.position || 'relative';
+  btn.style.overflow = 'hidden';
+  btn.appendChild(r);
+  setTimeout(()=>r.remove(), 650);
+});
+
+/* ---------------------------- AMBIENT DREAD (Web Audio API) ---------------------------- */
+let dreadCtx = null, dreadNodes = null, dreadOn = false;
+function toggleDread(){
+  const fab = document.getElementById('dread-toggle');
+  if(!dreadOn){
+    try{
+      dreadCtx = new (window.AudioContext || window.webkitAudioContext)();
+      const drone = dreadCtx.createOscillator();
+      drone.type = 'sine'; drone.frequency.value = 52;
+      const droneGain = dreadCtx.createGain(); droneGain.gain.value = 0.05;
+      const lfo = dreadCtx.createOscillator(); lfo.frequency.value = 0.12;
+      const lfoGain = dreadCtx.createGain(); lfoGain.gain.value = 6;
+      lfo.connect(lfoGain); lfoGain.connect(drone.frequency);
+      drone.connect(droneGain); droneGain.connect(dreadCtx.destination);
+      drone.start(); lfo.start();
+
+      const drone2 = dreadCtx.createOscillator();
+      drone2.type='triangle'; drone2.frequency.value = 78;
+      const drone2Gain = dreadCtx.createGain(); drone2Gain.gain.value = 0.025;
+      drone2.connect(drone2Gain); drone2Gain.connect(dreadCtx.destination);
+      drone2.start();
+
+      dreadNodes = { drone, lfo, droneGain, drone2 };
+      dreadOn = true;
+      fab.textContent = '🔊'; fab.classList.add('active');
+      toast('Ambient dread enabled.');
+    }catch(e){ toast('Audio is unavailable in this browser.'); }
+  } else {
+    try{
+      dreadNodes.drone.stop(); dreadNodes.lfo.stop(); dreadNodes.drone2.stop();
+      dreadCtx.close();
+    }catch(e){}
+    dreadOn = false;
+    fab.textContent = '🔇'; fab.classList.remove('active');
+    toast('Ambient dread disabled.');
+  }
+}
+
+/* ---------------------------- 3D NARAKA CHAMBER ---------------------------- */
+let chamberBuilt = false, chamberAngle = 0, chamberDrag = false, chamberLastX = 0, chamberAutoSpin = true, chamberRadius = 340;
+
+function initChamber3D(){
+  const ring = document.getElementById('chamber-ring');
+  if(!chamberBuilt){
+    const n = database.length;
+    chamberRadius = Math.round(84 / Math.tan(Math.PI / n));
+    ring.innerHTML = database.map((d,i)=>{
+      const ang = (360 / n) * i;
+      const icon = (d.vName.en.match(/\p{Emoji}/u) || ['🔥'])[0];
+      const cleanName = d.vName.en.replace(/[^\w\s]/g,'').trim();
+      return `<div class="chamber-card" style="transform:rotateY(${ang}deg) translateZ(${chamberRadius}px);" onclick="openNarakaModal(${d.id})">
+        <div class="cc-icon">${icon}</div>
+        <div class="cc-name">${cleanName}</div>
+        <div class="cc-num">NARAKA ${String(i+1).padStart(2,'0')} / ${n}</div>
+      </div>`;
+    }).join('');
+    chamberBuilt = true;
+    setupChamberDrag();
+    requestAnimationFrame(spinChamber);
+  }
+}
+
+function updateChamberTransform(){
+  document.getElementById('chamber-ring').style.transform = `translateZ(-${chamberRadius}px) rotateY(${chamberAngle}deg)`;
+}
+
+function spinChamber(){
+  if(chamberAutoSpin && !chamberDrag){ chamberAngle += 0.06; updateChamberTransform(); }
+  requestAnimationFrame(spinChamber);
+}
+
+function setupChamberDrag(){
+  const vp = document.getElementById('chamber-viewport');
+  const start = (x)=>{ chamberDrag = true; chamberLastX = x; chamberAutoSpin = false; };
+  const move = (x)=>{ if(!chamberDrag) return; const dx = x - chamberLastX; chamberLastX = x; chamberAngle -= dx * 0.35; updateChamberTransform(); };
+  const end = ()=>{ chamberDrag = false; setTimeout(()=>chamberAutoSpin = true, 2200); };
+  vp.addEventListener('mousedown', e=>start(e.clientX));
+  window.addEventListener('mousemove', e=>move(e.clientX));
+  window.addEventListener('mouseup', end);
+  vp.addEventListener('touchstart', e=>start(e.touches[0].clientX), {passive:true});
+  vp.addEventListener('touchmove', e=>move(e.touches[0].clientX), {passive:true});
+  vp.addEventListener('touchend', end);
+}
+
+function openNarakaModal(id){
+  const d = database.find(x=>x.id===id);
+  if(!d) return;
+  triggerHaptic(30);
+  const icon = (d.vName.en.match(/\p{Emoji}/u) || ['🔥'])[0];
+  const bg = document.createElement('div');
+  bg.className = 'naraka-modal-bg';
+  bg.onclick = (e)=>{ if(e.target===bg) bg.remove(); };
+  bg.innerHTML = `<div class="naraka-modal">
+    <div class="nm-icon">${icon}</div>
+    <h2 class="font-display" style="color:var(--gold); margin:10px 0 4px;">${d.vName[currentLang]||d.vName.en}</h2>
+    <div class="eyebrow">FOR THE SIN OF: ${d.sin[currentLang]||d.sin.en}</div>
+    <p style="color:#e7d9c4; line-height:1.6; margin:14px 0;">${d.vDesc[currentLang]||d.vDesc.en}</p>
+    <div class="panel" style="text-align:left;"><div class="eyebrow">⚖️ Modern Legal Parallel</div><p style="font-size:14px; color:#e7d9c4;">${d.modern||'No modern parallel recorded.'}</p></div>
+    <button class="btn btn-ghost btn-sm" onclick="this.closest('.naraka-modal-bg').remove()">✕ Close</button>
+  </div>`;
+  document.body.appendChild(bg);
+}
+
+/* ---------------------------- ULTRA HORROR MODE ---------------------------- */
+let ultraOn = false, ultraTimers = [];
+function toggleUltra(){
+  ultraOn = !ultraOn;
+  document.body.classList.toggle('ultra', ultraOn);
+  ['ultra-toggle','ultra-home-btn'].forEach(id=>{ const el=document.getElementById(id); if(el) el.classList.toggle('active', ultraOn); });
+  const fab = document.getElementById('ultra-toggle'); if(fab) fab.textContent = ultraOn ? '☠️' : '💀';
+  if(ultraOn){
+    toast('Ultra Horror Mode engaged. There is no going back quietly.');
+    ultraTimers.push(setInterval(triggerCrackFlash, 7000 + Math.random()*6000));
+    ultraTimers.push(setInterval(triggerJumpscareText, 15000 + Math.random()*12000));
+    triggerHaptic([60,40,60]);
+  } else {
+    toast('Ultra Horror Mode disengaged.');
+    ultraTimers.forEach(t=>clearInterval(t));
+    ultraTimers = [];
+  }
+}
+
+function triggerCrackFlash(){
+  if(!ultraOn) return;
+  const el = document.getElementById('crack-flash');
+  el.classList.remove('hit'); void el.offsetWidth; el.classList.add('hit');
+  document.body.classList.add('shake');
+  setTimeout(()=>document.body.classList.remove('shake'), 350);
+}
+
+const JUMPSCARE_MSGS = ['👁️ IT SEES YOU 👁️','⚖️ YOUR KARMA IS BEING WEIGHED ⚖️','🔥 THE NARAKA AWAITS 🔥','💀 NO SOUL ESCAPES 💀','🩸 CHITRAGUPTA IS WATCHING 🩸'];
+function triggerJumpscareText(){
+  if(!ultraOn) return;
+  const el = document.getElementById('jumpscare-text');
+  document.getElementById('jumpscare-msg').textContent = JUMPSCARE_MSGS[Math.floor(Math.random()*JUMPSCARE_MSGS.length)];
+  el.classList.remove('show'); void el.offsetWidth; el.classList.add('show');
+  triggerHaptic([40,30,40,30,80]);
+}
+
+/* ---------------------------- BLOOD RAIN ---------------------------- */
+let bloodRainOn = false, bloodRainInterval = null;
+function toggleBloodRain(){
+  bloodRainOn = !bloodRainOn;
+  const container = document.getElementById('blood-rain');
+  container.classList.toggle('on', bloodRainOn);
+  if(bloodRainOn){
+    container.innerHTML = '';
+    for(let i=0;i<60;i++) spawnBloodDrop(container, true);
+    bloodRainInterval = setInterval(()=>spawnBloodDrop(container, false), 220);
+    toast('The sky weeps blood.');
+  } else {
+    clearInterval(bloodRainInterval);
+    toast('The rain subsides.');
+  }
+}
+function spawnBloodDrop(container, randomDelay){
+  const d = document.createElement('div');
+  d.className = 'drop';
+  const h = 20 + Math.random()*50;
+  d.style.left = Math.random()*100 + 'vw';
+  d.style.height = h + 'px';
+  d.style.animationDuration = (1.4 + Math.random()*1.8) + 's';
+  d.style.animationDelay = randomDelay ? (Math.random()*2) + 's' : '0s';
+  d.style.opacity = 0.4 + Math.random()*0.5;
+  container.appendChild(d);
+  setTimeout(()=>d.remove(), 4200);
+}
+
+/* ---------------------------- DEATH BELL ---------------------------- */
+function ringDeathBell(){
+  triggerHaptic([80,50,120]);
+  triggerCrackFlashForce();
+  try{
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const now = ctx.currentTime;
+    [220, 330, 55].forEach((freq, i)=>{
+      const osc = ctx.createOscillator(); const gain = ctx.createGain();
+      osc.type = i===2 ? 'sine' : 'triangle'; osc.frequency.value = freq;
+      gain.gain.setValueAtTime(0.22/(i+1), now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 3.2);
+      osc.connect(gain); gain.connect(ctx.destination);
+      osc.start(now); osc.stop(now + 3.3);
+    });
+  }catch(e){ toast('Audio unavailable in this browser.'); }
+  toast('🔔 The Death Bell tolls across Yamaloka...');
+}
+function triggerCrackFlashForce(){
+  const el = document.getElementById('crack-flash');
+  el.classList.remove('hit'); void el.offsetWidth; el.classList.add('hit');
+  document.body.classList.add('shake');
+  setTimeout(()=>document.body.classList.remove('shake'), 400);
+}
+
+/* ---------------------------- WHISPERS OF THE DAMNED ---------------------------- */
+const WHISPERS = [
+  'Your deeds are already written...','There is no hiding from the ledger...','Chitragupta counts every breath you take...',
+  'The scale never lies...','Somewhere, a naraka is being prepared for you...','Dharma sees what you think no one sees...',
+  'The river of blood remembers your name...','Time is short, mortal soul...'
+];
+function whisperVoid(){
+  const line = WHISPERS[Math.floor(Math.random()*WHISPERS.length)];
+  const cap = document.getElementById('whisper-caption');
+  cap.textContent = '"' + line + '"';
+  cap.classList.add('show');
+  setTimeout(()=>cap.classList.remove('show'), 3600);
+  try{
+    if('speechSynthesis' in window){
+      const u = new SpeechSynthesisUtterance(line);
+      u.pitch = 0.35; u.rate = 0.78; u.volume = 0.9;
+      speechSynthesis.cancel(); speechSynthesis.speak(u);
+    }
+  }catch(e){}
+  triggerHaptic(60);
+}
+
+/* ---------------------------- CURSOR EMBER TRAIL ---------------------------- */
+let lastEmberTime = 0;
+function spawnEmber(x,y){
+  const now = Date.now();
+  if(now - lastEmberTime < 45) return;
+  lastEmberTime = now;
+  const p = document.createElement('div');
+  p.className = 'ember-particle';
+  const size = 3 + Math.random()*5;
+  p.style.width = p.style.height = size + 'px';
+  p.style.left = (x - size/2) + 'px';
+  p.style.top = (y - size/2) + 'px';
+  document.body.appendChild(p);
+  setTimeout(()=>p.remove(), 900);
+}
+document.addEventListener('mousemove', (e)=>{ if(ultraOn) spawnEmber(e.clientX, e.clientY); });
+document.addEventListener('touchmove', (e)=>{ if(ultraOn && e.touches[0]) spawnEmber(e.touches[0].clientX, e.touches[0].clientY); }, {passive:true});
+
+/* --- Fog/vignette parallax on mouse move --- */
+document.addEventListener('mousemove', (e)=>{
+  const px = (e.clientX / window.innerWidth - 0.5) * 2;
+  const py = (e.clientY / window.innerHeight - 0.5) * 2;
+  const fogA = document.querySelector('.fog-a'), fogB = document.querySelector('.fog-b');
+  if(fogA) fogA.style.marginLeft = (px * 14) + 'px';
+  if(fogB) fogB.style.marginLeft = (px * -10) + 'px';
+  if(fogA) fogA.style.marginTop = (py * 10) + 'px';
+  const yama = document.getElementById('yama-silhouette');
+  if(yama) yama.style.transform = `translateX(calc(-50% + ${px*18}px)) rotate(${px*1.5}deg)`;
+});
+
+/* ---------------------------- WEBGL 3D HALL (Three.js) ---------------------------- */
+let hall3dReady = false, hall3dScene, hall3dCamera, hall3dRenderer, hall3dGroup, hall3dDrag=false, hall3dLastX=0, hall3dLastY=0, hall3dRotY=0, hall3dRotX=-0.1;
+function initHall3D(){
+  if(hall3dReady || typeof THREE === 'undefined') return;
+  const canvas = document.getElementById('hall3d-canvas');
+  const wrap = document.getElementById('hall3d-wrap');
+  if(!canvas || !wrap) return;
+  try{
+    const W = wrap.clientWidth, H = wrap.clientHeight;
+    hall3dScene = new THREE.Scene();
+    hall3dScene.fog = new THREE.FogExp2(0x0a0605, 0.045);
+    hall3dCamera = new THREE.PerspectiveCamera(55, W/H, 0.1, 100);
+    hall3dCamera.position.set(0, 2.2, 9);
+    hall3dRenderer = new THREE.WebGLRenderer({canvas, antialias:true, alpha:true});
+    hall3dRenderer.setSize(W, H);
+    hall3dRenderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+
+    hall3dGroup = new THREE.Group();
+    hall3dScene.add(hall3dGroup);
+
+    // Floor
+    const floor = new THREE.Mesh(new THREE.PlaneGeometry(40,40), new THREE.MeshStandardMaterial({color:0x140806, roughness:0.9}));
+    floor.rotation.x = -Math.PI/2; floor.position.y = -2;
+    hall3dGroup.add(floor);
+
+    // Pillars
+    const pillarMat = new THREE.MeshStandardMaterial({color:0x2a1410, roughness:0.7});
+    for(let i=-1;i<=1;i+=2){
+      for(let z=-4; z<=6; z+=4){
+        const pillar = new THREE.Mesh(new THREE.CylinderGeometry(0.35,0.45,4.4,10), pillarMat);
+        pillar.position.set(i*3.4, 0, z);
+        hall3dGroup.add(pillar);
+      }
+    }
+
+    // Central floating scale (simple representation)
+    const scaleMat = new THREE.MeshStandardMaterial({color:0xd4af37, metalness:0.6, roughness:0.35, emissive:0x2a1500, emissiveIntensity:0.3});
+    const beamBar = new THREE.Mesh(new THREE.CylinderGeometry(0.04,0.04,2.6,8), scaleMat);
+    beamBar.rotation.z = Math.PI/2; beamBar.position.y = 1.4;
+    hall3dGroup.add(beamBar);
+    const post = new THREE.Mesh(new THREE.CylinderGeometry(0.05,0.05,2.8,8), scaleMat);
+    post.position.y = 0.1;
+    hall3dGroup.add(post);
+    [-1.2,1.2].forEach(x=>{
+      const pan = new THREE.Mesh(new THREE.SphereGeometry(0.32,12,8, 0, Math.PI*2, 0, Math.PI/2), new THREE.MeshStandardMaterial({color:0x8c1220, metalness:0.3, roughness:0.5, side:THREE.DoubleSide}));
+      pan.position.set(x, 0.9, 0);
+      pan.rotation.x = Math.PI;
+      hall3dGroup.add(pan);
+    });
+
+    // Torch point lights
+    const torchColors = [0xff7a2e, 0xc94a2d];
+    hall3dTorchLights = [];
+    for(let i=0;i<4;i++){
+      const light = new THREE.PointLight(torchColors[i%2], 2.2, 9, 2);
+      const ang = (i/4) * Math.PI*2;
+      light.position.set(Math.cos(ang)*4.2, 0.6, Math.sin(ang)*4.2);
+      hall3dGroup.add(light);
+      hall3dTorchLights.push(light);
+    }
+    hall3dScene.add(new THREE.AmbientLight(0x2a1810, 0.6));
+
+    hall3dReady = true;
+    document.getElementById('hall3d-loading').style.display = 'none';
+
+    canvas.addEventListener('mousedown', e=>{ hall3dDrag=true; hall3dLastX=e.clientX; hall3dLastY=e.clientY; });
+    window.addEventListener('mouseup', ()=>hall3dDrag=false);
+    window.addEventListener('mousemove', e=>{
+      if(!hall3dDrag) return;
+      hall3dRotY += (e.clientX - hall3dLastX)*0.006;
+      hall3dRotX = Math.max(-0.5, Math.min(0.4, hall3dRotX + (e.clientY - hall3dLastY)*0.004));
+      hall3dLastX=e.clientX; hall3dLastY=e.clientY;
+    });
+    canvas.addEventListener('touchstart', e=>{ hall3dDrag=true; hall3dLastX=e.touches[0].clientX; hall3dLastY=e.touches[0].clientY; }, {passive:true});
+    canvas.addEventListener('touchmove', e=>{
+      if(!hall3dDrag) return;
+      hall3dRotY += (e.touches[0].clientX - hall3dLastX)*0.006;
+      hall3dLastX=e.touches[0].clientX; hall3dLastY=e.touches[0].clientY;
+    }, {passive:true});
+    canvas.addEventListener('touchend', ()=>hall3dDrag=false);
+
+    animateHall3D();
+  }catch(e){ console.log('WebGL unavailable', e); document.getElementById('hall3d-loading').textContent = '⚠ 3D unavailable on this device'; }
+}
+let hall3dTorchLights = [];
+function animateHall3D(){
+  if(!hall3dReady) return;
+  requestAnimationFrame(animateHall3D);
+  hall3dRotY += 0.0015;
+  hall3dGroup.rotation.y = hall3dRotY;
+  hall3dCamera.position.y = 2.2 + hall3dRotX*2;
+  const t = Date.now()*0.002;
+  hall3dTorchLights.forEach((l,i)=>{ l.intensity = 1.8 + Math.sin(t*3 + i*2)*0.6 + Math.random()*0.15; });
+  hall3dRenderer.render(hall3dScene, hall3dCamera);
+}
+window.addEventListener('resize', ()=>{
+  if(!hall3dReady) return;
+  const wrap = document.getElementById('hall3d-wrap');
+  hall3dCamera.aspect = wrap.clientWidth/wrap.clientHeight;
+  hall3dCamera.updateProjectionMatrix();
+  hall3dRenderer.setSize(wrap.clientWidth, wrap.clientHeight);
+});
+
+/* ---------------------------- CRT MODE ---------------------------- */
+let crtOn = false;
+function toggleCRT(){
+  crtOn = !crtOn;
+  document.body.classList.toggle('crt', crtOn);
+  document.getElementById('crt-toggle').classList.toggle('active', crtOn);
+  toast(crtOn ? '📺 CRT signal locked.' : '📺 CRT signal lost.');
+}
+
+/* ---------------------------- PROCEDURAL SOUNDSCAPE ---------------------------- */
+let soundscapeOn = false, soundscapeCtx = null, soundscapeTimers = [];
+function toggleSoundscape(){
+  soundscapeOn = !soundscapeOn;
+  document.getElementById('soundscape-toggle').classList.toggle('active', soundscapeOn);
+  if(soundscapeOn){
+    try{
+      soundscapeCtx = new (window.AudioContext || window.webkitAudioContext)();
+      scheduleSoundscapeEvent();
+      toast('🌫️ The soundscape of Yamaloka awakens...');
+    }catch(e){ toast('Audio unavailable in this browser.'); soundscapeOn=false; }
+  } else {
+    soundscapeTimers.forEach(t=>clearTimeout(t));
+    soundscapeTimers = [];
+    if(soundscapeCtx){ try{ soundscapeCtx.close(); }catch(e){} soundscapeCtx=null; }
+    toast('🌫️ Silence returns.');
+  }
+}
+function scheduleSoundscapeEvent(){
+  if(!soundscapeOn || !soundscapeCtx) return;
+  const type = Math.random();
+  const ctx = soundscapeCtx, now = ctx.currentTime;
+  if(type < 0.35){ // distant scream-ish sweep
+    const osc = ctx.createOscillator(); const gain = ctx.createGain(); const filt = ctx.createBiquadFilter();
+    osc.type='sawtooth'; filt.type='bandpass'; filt.frequency.value = 400 + Math.random()*300; filt.Q.value = 6;
+    osc.frequency.setValueAtTime(180 + Math.random()*80, now);
+    osc.frequency.exponentialRampToValueAtTime(500 + Math.random()*200, now+0.8);
+    osc.frequency.exponentialRampToValueAtTime(120, now+1.6);
+    gain.gain.setValueAtTime(0.0001, now);
+    gain.gain.exponentialRampToValueAtTime(0.05, now+0.3);
+    gain.gain.exponentialRampToValueAtTime(0.0001, now+1.7);
+    osc.connect(filt); filt.connect(gain); gain.connect(ctx.destination);
+    osc.start(now); osc.stop(now+1.8);
+  } else if(type < 0.65){ // dripping water
+    const osc = ctx.createOscillator(); const gain = ctx.createGain();
+    osc.type='sine'; osc.frequency.value = 900 + Math.random()*400;
+    gain.gain.setValueAtTime(0.06, now);
+    gain.gain.exponentialRampToValueAtTime(0.0001, now+0.25);
+    osc.connect(gain); gain.connect(ctx.destination);
+    osc.start(now); osc.stop(now+0.3);
+  } else if(type < 0.88){ // chains / metallic
+    const bufferSize = ctx.sampleRate * 0.4;
+    const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+    const data = buffer.getChannelData(0);
+    for(let i=0;i<bufferSize;i++) data[i] = (Math.random()*2-1) * Math.exp(-i/(bufferSize*0.3));
+    const noise = ctx.createBufferSource(); noise.buffer = buffer;
+    const filt = ctx.createBiquadFilter(); filt.type='highpass'; filt.frequency.value = 1800;
+    const gain = ctx.createGain(); gain.gain.value = 0.04;
+    noise.connect(filt); filt.connect(gain); gain.connect(ctx.destination);
+    noise.start(now);
+  } else { // distant temple bell
+    [440,660].forEach((f,i)=>{
+      const osc = ctx.createOscillator(); const gain = ctx.createGain();
+      osc.type='sine'; osc.frequency.value = f;
+      gain.gain.setValueAtTime(0.05/(i+1), now);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now+2.4);
+      osc.connect(gain); gain.connect(ctx.destination);
+      osc.start(now); osc.stop(now+2.5);
+    });
+  }
+  soundscapeTimers.push(setTimeout(scheduleSoundscapeEvent, 2200 + Math.random()*4500));
+}
+
+/* ---------------------------- ACHIEVEMENTS ---------------------------- */
+const ACHIEVEMENTS = [
+  { id:'first', icon:'🕯️', name:'First Confession', desc:'Face judgment for the first time.', test:()=>judgmentLog.length>=1 },
+  { id:'five', icon:'⛓️', name:'Frequent Sinner', desc:'Receive 5 judgments.', test:()=>judgmentLog.length>=5 },
+  { id:'ten', icon:'🔥', name:'Regular of Yamaloka', desc:'Receive 10 judgments.', test:()=>judgmentLog.length>=10 },
+  { id:'allnaraka', icon:'🌀', name:'Chamber Wanderer', desc:'Open the 3D Naraka Chamber.', test:()=>localStorage.getItem('yama_visited_chamber')==='1' },
+  { id:'ultra', icon:'💀', name:'Ultra Damned', desc:'Enable Ultra Horror Mode.', test:()=>ultraOn || localStorage.getItem('yama_used_ultra')==='1' },
+  { id:'lowkarma', icon:'🩸', name:'Deep in Paapa', desc:'Let your Karma Score fall to 15 or below.', test:()=>karmaScore<=15 },
+  { id:'highkarma', icon:'☀️', name:'Path of Punya', desc:'Raise your Karma Score to 85 or above.', test:()=>karmaScore>=85 },
+  { id:'bell', icon:'🔔', name:'Bellringer', desc:'Ring the Death Bell.', test:()=>localStorage.getItem('yama_rang_bell')==='1' },
+  { id:'whisper', icon:'🗣️', name:'Listener of Whispers', desc:'Hear a whisper of the damned.', test:()=>localStorage.getItem('yama_heard_whisper')==='1' },
+  { id:'crt', icon:'📺', name:'Old Signal', desc:'Enable CRT Mode.', test:()=>crtOn || localStorage.getItem('yama_used_crt')==='1' },
+  { id:'moviebuff', icon:'🎬', name:'Mythology Buff', desc:'Browse the mythology movie & series library.', test:()=>localStorage.getItem('yama_visited_movies')==='1' }
+];
+let unlockedAchievements = lsGet('yama_achievements', []);
+function checkAchievements(){
+  ACHIEVEMENTS.forEach(a=>{
+    if(!unlockedAchievements.includes(a.id) && a.test()){
+      unlockedAchievements.push(a.id);
+      lsSet('yama_achievements', unlockedAchievements);
+      showAchievementToast(a);
+    }
+  });
+}
+function showAchievementToast(a){
+  const t = document.getElementById('ach-toast');
+  document.getElementById('ach-toast-name').textContent = a.icon + ' ' + a.name;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'), 3800);
+  triggerHaptic([30,20,30]);
+}
+function renderAchievements(){
+  checkAchievements();
+  const grid = document.getElementById('ach-grid');
+  grid.innerHTML = ACHIEVEMENTS.map(a=>{
+    const unlocked = unlockedAchievements.includes(a.id);
+    return `<div class="ach-card ${unlocked?'unlocked':''}">
+      <div class="ach-icon">${unlocked ? a.icon : '❓'}</div>
+      <div><div class="ach-name">${unlocked ? a.name : 'Locked'}</div><div class="ach-desc">${unlocked ? a.desc : '???'}</div></div>
+    </div>`;
+  }).join('');
+}
+
+/* ---------------------------- LEADERBOARD ---------------------------- */
+function renderLeaderboard(){
+  const c = document.getElementById('leaderboard-canvas');
+  const ctx = c.getContext('2d');
+  const W=c.width, H=c.height;
+  ctx.clearRect(0,0,W,H);
+  ctx.fillStyle = 'rgba(10,6,5,0.4)'; ctx.fillRect(0,0,W,H);
+
+  const counts = {};
+  judgmentLog.forEach(j=>{ counts[j.narakaId] = (counts[j.narakaId]||0)+1; });
+  let entries = Object.entries(counts).map(([id,count])=>{
+    const d = database.find(x=>String(x.id)===String(id));
+    return { name: d ? d.vName.en.replace(/[^\w\s]/g,'').trim() : 'Unknown', count };
+  }).sort((a,b)=>b.count-a.count).slice(0,10);
+
+  ctx.font = '14px Georgia'; ctx.fillStyle = '#8a746a'; ctx.textAlign='center';
+  if(entries.length===0){
+    ctx.fillText('No judgments recorded yet. Confess to populate the ledger.', W/2, H/2);
+    return;
+  }
+  const maxCount = Math.max(...entries.map(e=>e.count));
+  const barH = Math.min(34, (H-60)/entries.length - 8);
+  const startY = 30;
+  entries.forEach((e,i)=>{
+    const y = startY + i*(barH+12);
+    const barW = (e.count/maxCount) * (W-260);
+    const grad = ctx.createLinearGradient(160,0,160+barW,0);
+    grad.addColorStop(0,'#8c1220'); grad.addColorStop(1,'#d4af37');
+    ctx.fillStyle = grad;
+    ctx.fillRect(160, y, barW, barH);
+    ctx.fillStyle = '#f1e6d3'; ctx.font='12px Georgia'; ctx.textAlign='right';
+    ctx.fillText(e.name.slice(0,20), 150, y+barH*0.7);
+    ctx.textAlign='left'; ctx.fillStyle='#d4af37';
+    ctx.fillText(e.count, 168+barW, y+barH*0.7);
+  });
+}
+
+/* ---------------------------- SHARE VERDICT ---------------------------- */
+function shareVerdict(){
+  const name = document.getElementById('v-name').textContent;
+  const desc = document.getElementById('v-desc').textContent;
+  const shareText = `${name}\n${desc}\n\nJudged at the Yama Dharma Terminal ⚖️`;
+  if(navigator.share){
+    navigator.share({ title:'My Yama Dharma Verdict', text:shareText }).catch(()=>{});
+  } else if(navigator.clipboard){
+    navigator.clipboard.writeText(shareText).then(()=>toast('Verdict copied to clipboard.')).catch(()=>toast('Could not copy verdict.'));
+  } else {
+    toast('Sharing is not supported in this browser.');
+  }
+}
+
+/* ---------------------------- OMEN TICKER (simulated ambience) ---------------------------- */
+const OMEN_NAMES = ['a nameless soul','a weary traveler','a forgotten king','a repentant thief','a grieving mother','a fallen soldier','a silent merchant'];
+let omenTickerInterval = null;
+function startOmenTicker(){
+  if(omenTickerInterval) return;
+  const line = document.getElementById('omen-line');
+  const tick = ()=>{
+    const name = OMEN_NAMES[Math.floor(Math.random()*OMEN_NAMES.length)];
+    const d = database[Math.floor(Math.random()*database.length)];
+    line.style.opacity = 0;
+    setTimeout(()=>{
+      line.textContent = `👻 Echo: ${name} was just weighed and sent toward ${d.vName.en.replace(/[^\w\s]/g,'').trim()}...`;
+      line.style.opacity = 1;
+    }, 400);
+  };
+  tick();
+  omenTickerInterval = setInterval(tick, 6000);
+}
+
+/* ---------------------------- AMBIENT FIRE PARTICLE CANVAS ---------------------------- */
+(function(){
+  const canvas = document.getElementById('fire-canvas');
+  if(!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let particles = [];
+  function resize(){ canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+  resize(); window.addEventListener('resize', resize);
+  function spawn(){
+    particles.push({ x: Math.random()*canvas.width, y: canvas.height + 10, r: 1 + Math.random()*2.5,
+      vy: -(0.4 + Math.random()*0.9), vx:(Math.random()-0.5)*0.4, life:1, decay: 0.0025 + Math.random()*0.003,
+      hue: 20 + Math.random()*30 });
+  }
+  function loop(){
+    if(particles.length < 90 && Math.random() < 0.6) spawn();
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    particles.forEach(p=>{
+      p.x += p.vx; p.y += p.vy; p.life -= p.decay;
+      ctx.beginPath();
+      ctx.fillStyle = `hsla(${p.hue}, 90%, 55%, ${Math.max(p.life,0)*0.65})`;
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+      ctx.fill();
+    });
+    particles = particles.filter(p=>p.life>0 && p.y > -20);
+    requestAnimationFrame(loop);
+  }
+  loop();
+})();
+
+/* ---------------------------- MARK ONE-TIME ACHIEVEMENT FLAGS ---------------------------- */
+(function(){
+  const origInitChamber3D = initChamber3D;
+  initChamber3D = function(){ localStorage.setItem('yama_visited_chamber','1'); origInitChamber3D(); checkAchievements(); };
+  const origToggleUltra = toggleUltra;
+  toggleUltra = function(){ localStorage.setItem('yama_used_ultra','1'); origToggleUltra(); checkAchievements(); };
+  const origRingBell = ringDeathBell;
+  ringDeathBell = function(){ localStorage.setItem('yama_rang_bell','1'); origRingBell(); checkAchievements(); };
+  const origWhisper = whisperVoid;
+  whisperVoid = function(){ localStorage.setItem('yama_heard_whisper','1'); origWhisper(); checkAchievements(); };
+  const origCRT = toggleCRT;
+  toggleCRT = function(){ localStorage.setItem('yama_used_crt','1'); origCRT(); checkAchievements(); };
+})();
+
+/* ---------------------------- PWA (best-effort; requires http/https hosting) ---------------------------- */
+(function(){
+  try{
+    const manifest = { name:'Yama Dharma Terminal', short_name:'YamaTerminal', start_url:'.', display:'standalone',
+      background_color:'#0a0605', theme_color:'#8c1220', icons:[] };
+    const blob = new Blob([JSON.stringify(manifest)], {type:'application/json'});
+    const link = document.createElement('link');
+    link.rel = 'manifest'; link.href = URL.createObjectURL(blob);
+    document.head.appendChild(link);
+  }catch(e){ console.log('Manifest injection skipped:', e); }
+})();
+
+/* ---------------------------- INIT ---------------------------- */
+document.addEventListener('DOMContentLoaded', ()=>{
+  setLang('en');
+  updateKarmaMeter();
+});
+</script>
+</body>
+</html>
